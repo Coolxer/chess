@@ -8,5 +8,14 @@ namespace chess
 {
     class Player
     {
+        private ConsoleColor color;
+
+        public Player(char p)
+        {
+            if (p == 'w')
+                color = ConsoleColor.White;
+            else if (p == 'b')
+                color = ConsoleColor.Blue;
+        }
     }
 }

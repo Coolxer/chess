@@ -6,7 +6,24 @@ using System.Threading.Tasks;
 
 namespace chess
 {
-    class Pawn
+    class Pawn : Figure
     {
+        public Pawn(Player player, Point p)
+        {
+            value = 'P';
+            color = player.color;
+
+            pos = p;
+        }
+
+        public override void move()
+        {
+            
+        }
+
+        public override void allowMoves()
+        {
+            
+        }
     }
 }

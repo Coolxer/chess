@@ -6,28 +6,20 @@ using System.Threading.Tasks;
 
 namespace chess
 {
-    class Figure
+    public abstract class Figure
     {
-        private struct pos
+        public Point pos { get; set; }
+        public char value { get; set; }
+        public char color { get; set; }
+
+        private int[] allowedMovements; //top top-right right bottom-right bottom bottom-left left top-left //1 2 3 4 5 6 7 8
+
+        public Figure()
         {
-            short x;
-            short y;
-        };
-
-        private char value;
-        private char color;
-
-        private int[] moves; //top top-right right bottom-right bottom bottom-left left top-left
-
-
-        public void move()
-        {
-
+            
         }
 
-        public void allowMoves()
-        {
-
-        }        
+        public abstract void move();
+        public abstract void allowMoves();       
     }
 }

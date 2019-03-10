@@ -9,6 +9,7 @@ namespace chess
     class Board
     {
         private char[,] poles;
+        private ConsoleColor background;
 
         public Board()
         {
@@ -21,14 +22,18 @@ namespace chess
 
         public void draw()
         {   
-            Console.WriteLine("-----------------");
-            for(int i = 0; i < 8; i++ )
+            Console.WriteLine("---------------------");
+            Console.WriteLine("     a b c d e f g h");
+            Console.WriteLine("    -----------------");
+            for (int i = 0, x = 8; i < 8; i++, x-- )
             {
+                Console.Write(" " + x.ToString() + " !");
                 for(int j = 0; j < 8; j++)
                     Console.Write(" " + poles[i, j]);
+                Console.Write(" !");
                 Console.WriteLine();      
             }
-            Console.WriteLine("-----------------");
+            Console.WriteLine("---------------------");
         }
 
     }
