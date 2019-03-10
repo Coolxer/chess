@@ -8,23 +8,27 @@ namespace chess
 {
     class Board
     {
-        private int width = 8;
-        private int height = 8;
-
         private char[,] poles;
 
         public Board()
         {
-           
+            poles = new char[8, 8];
+
+            for (int i = 0; i < 8; i++)
+                for (int j = 0; j < 8; j++)
+                    poles[i, j] = '.';
         }
 
         public void draw()
-        {
-            Console.WriteLine("----------");
-
-            
-
-            Console.WriteLine("----------");
+        {   
+            Console.WriteLine("-----------------");
+            for(int i = 0; i < 8; i++ )
+            {
+                for(int j = 0; j < 8; j++)
+                    Console.Write(" " + poles[i, j]);
+                Console.WriteLine();      
+            }
+            Console.WriteLine("-----------------");
         }
 
     }
