@@ -17,20 +17,37 @@ namespace chess
 
             for (int i = 0; i < 8; i++)
                 for (int j = 0; j < 8; j++)
-                    poles[i, j] = '.';
+                    poles[i, j] = ' ';
         }
 
         public void draw()
         {   
             Console.WriteLine("---------------------");
-            Console.WriteLine("     a b c d e f g h");
-            Console.WriteLine("    -----------------");
+            Console.WriteLine("    a b c d e f g h ");
             for (int i = 0, x = 8; i < 8; i++, x-- )
             {
-                Console.Write(" " + x.ToString() + " !");
-                for(int j = 0; j < 8; j++)
+                Console.Write(" " + x.ToString() + " ");
+                for (int j = 0; j < 8; j++)
+                {
+                    if(i % 2 == 0)
+                    {
+                        if(j % 2 == 0)
+                            Console.BackgroundColor = ConsoleColor.DarkGray;
+                        else
+                            Console.BackgroundColor = ConsoleColor.DarkGreen;
+                    }
+                    else
+                    {
+                        if (j % 2 != 0)
+                            Console.BackgroundColor = ConsoleColor.DarkGray;
+                        else
+                            Console.BackgroundColor = ConsoleColor.DarkGreen;
+                    }
+
                     Console.Write(" " + poles[i, j]);
-                Console.Write(" !");
+
+                    Console.ResetColor();
+                }
                 Console.WriteLine();      
             }
             Console.WriteLine("---------------------");

@@ -11,7 +11,7 @@ namespace chess
         public Pawn(Player player, Point p)
         {
             value = 'P';
-            color = player.color;
+            //color = player.color;
 
             pos = p;
         }
