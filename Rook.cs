@@ -6,7 +6,21 @@ using System.Threading.Tasks;
 
 namespace chess
 {
-    class Rook
+    class Rook : Figure
     {
+        public Rook(Point p) : base(p)
+        {
+            value = 'R';
+        }
+
+        public override void move()
+        {
+
+        }
+
+        public override void allowMoves()
+        {
+
+        }
     }
 }

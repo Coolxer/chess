@@ -6,7 +6,21 @@ using System.Threading.Tasks;
 
 namespace chess
 {
-    class King
+    class King : Figure
     {
+        public King(Point p) : base(p)
+        {
+            value = 'K';
+        }
+
+        public override void move()
+        {
+
+        }
+
+        public override void allowMoves()
+        {
+
+        }
     }
 }

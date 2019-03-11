@@ -8,16 +8,16 @@ namespace chess
 {
     class Board
     {
-        private char[,] poles;
+        private char[,] fields;
         private ConsoleColor background;
 
         public Board()
         {
-            poles = new char[8, 8];
+            fields = new char[8, 8];
 
             for (int i = 0; i < 8; i++)
                 for (int j = 0; j < 8; j++)
-                    poles[i, j] = ' ';
+                    fields[i, j] = ' ';
         }
 
         public void draw()
@@ -44,13 +44,26 @@ namespace chess
                             Console.BackgroundColor = ConsoleColor.DarkGreen;
                     }
 
-                    Console.Write(" " + poles[i, j]);
+                    Console.Write(" " + fields[i, j]);
 
                     Console.ResetColor();
                 }
                 Console.WriteLine();      
             }
             Console.WriteLine("---------------------");
+        }
+
+        public void createGrid(Figure[] f1, Figure[] f2)
+        {
+            Console.WriteLine(f1[0].pos.X + " " +  f1[0].pos.Y);
+
+            for (int i = 0; i < f1.Length; i++)
+                fields[f1[i].pos.X, f1[i].pos.Y] = f1[i].value;
+
+            for (int i = 0; i < f2.Length; i++)
+                fields[f2[i].pos.X, f2[i].pos.Y] = f2[i].value;
+
+            draw();
         }
 
     }

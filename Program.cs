@@ -10,9 +10,8 @@ namespace chess
     {
         static void Main(string[] args)
         {
-            Board board = new Board();
-            board.draw();
-            Console.ReadKey();
+            Game game = new Game();
+            game.run();
         }
     }
 }
