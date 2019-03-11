@@ -51,5 +51,10 @@ namespace chess
                     figures[i] = new Pawn(new Point(letters[j].ToString() + '2'));
             }
         }
+
+        public void move()
+        {
+
+        }
     }
 }
