@@ -45,9 +45,9 @@ namespace chess
                         {
                             Console.WriteLine("valid");
                             if (!turn)
-                                w.move();
+                                w.move(command);
                             else
-                                b.move();
+                                b.move(command);
                         }
                         else
                             Console.WriteLine("not valid");

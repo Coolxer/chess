@@ -12,6 +12,7 @@ namespace chess
 
         public  Figure[] figures { get; set; }
         private char[] letters;
+        private Figure picked;
 
         public Player(char p)
         {
@@ -52,9 +53,23 @@ namespace chess
             }
         }
 
-        public void move()
+        public void move(string order)
         {
+            Point p = new Point(order[0], order[1]);
+            Point target = new Point(order[2], order[3]);
 
+            //first there should be question if chosen position is free of OWN figures (can hit and kill opposite == GOOD)
+
+            //if free we are looking what figure we want to move
+            for(int i = 0; i < figures.Length; i++)
+            {
+                if (figures[i].pos == p)
+                    picked = figures[i];
+            }
+
+            //there we should check in if the move is possible( the restrictions of the figure movement -> king, pawn, rook etc.)
+
+            //if the move is possible we can change the figure position figure.pos = target; and get back to the game loop to regenerate board and draw it
         }
     }
 }
