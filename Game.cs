@@ -8,6 +8,8 @@ namespace chess
 {
     class Game
     {
+        Commander cmd;
+
         Board board;
         Player w;
         Player b;
@@ -18,6 +20,7 @@ namespace chess
 
         public Game()
         {
+            cmd = new Commander();
             board = new Board();
             w = new Player('w');
             b = new Player('b');
@@ -33,43 +36,16 @@ namespace chess
                     redraw = false;
                 }
 
-                string command = Console.ReadLine();
+                String call = Console.ReadLine();
+                int code = cmd.process(call);
 
-                if (command.Length != 0)
+                if (code == 0)
+                    break;
+                else if(code == 1)
                 {
-                    if (command == "exit" || command == "quit")
-                        break;
-                    else
-                    {
-                        if(validMoveCommand(command))
-                        {
-                            Console.WriteLine("valid");
-                            if (!turn)
-                                w.move(command);
-                            else
-                                b.move(command);
-                        }
-                        else
-                            Console.WriteLine("not valid");
-                    }
-                }  
+                    Judge.Instance.consider(call);
+                }
             }
-        }
-
-        private bool validMoveCommand(string cmd)
-        {
-            bool valid = true;
-
-            if (cmd.Length != 4 )
-                valid = false;
-            else
-            {
-                //if ((cmd[0] >= 97 && cmd[0] <= 104) && (cmd[1] >= 49 && cmd[1] <= 56) && (cmd[2] >= 97 && cmd[2] <= 104) && (cmd[3] >= 49 && cmd[3] <= 56))
-                if ((cmd[0] < 97 || cmd[0] > 104) || (cmd[1] < 49 || cmd[1] > 56) || (cmd[2] < 97 || cmd[2] > 104) || (cmd[3] < 49 || cmd[3] > 56))
-                    valid = false;
-            }
-
-            return valid;
         }
     }
 }
