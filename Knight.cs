@@ -8,7 +8,7 @@ namespace chess
 {
     class Knight : Figure
     {
-        public Knight(Point p) : base(p)
+        public Knight(Point p, char c) : base(p, c)
         {
             value = 'K';
         }

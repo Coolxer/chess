@@ -8,7 +8,7 @@ namespace chess
 {
     class Bishop : Figure
     {
-        public Bishop(Point p) : base(p)
+        public Bishop(Point p, char c) : base(p, c)
         {
             value = 'B';
         }

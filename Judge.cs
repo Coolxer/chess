@@ -10,9 +10,9 @@ namespace chess
     {
         private Board board;
         private Player w, b;
-        private Figure current;
+        private Figure current = null;
 
-        private bool turn = false; // 0 - white player turn, 1 - black player turn 
+        private char turn = 'w'; // 0 - white player turn, 1 - black player turn 
 
         private static Judge judge;
 
@@ -38,23 +38,18 @@ namespace chess
 
         public bool consider(String request)
         {
-            bool allow = true;
-
             Point fp = new Point(request[0].ToString() + request[1].ToString());
             Point mp = new Point(request[2].ToString() + request[3].ToString());
 
-            if (board.getField(fp) == '')
+            current = board.getField(fp);
+
+            if (current == null || current.color != turn) //if user choose clear field to move or his opponent figure
                 return false;
 
-            //for(int i = 0; i < board.fields.Length; i++)
-            //{
-            //    if(board)
-            //}
+            if (board.getField(mp).color == current.color) //if user want to move its own figure above its own figure w to w, b to b
+                return false;
 
             return true;
-
-            
-
         }
     }
 }

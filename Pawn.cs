@@ -8,10 +8,9 @@ namespace chess
 {
     class Pawn : Figure
     {
-        public Pawn(Point p) : base(p)
+        public Pawn(Point p, char c) : base(p, c)
         {
             value = 'P';
-
         }
 
         public override void move()

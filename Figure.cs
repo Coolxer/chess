@@ -14,9 +14,10 @@ namespace chess
 
         private int[] allowedMovements; //top top-right right bottom-right bottom bottom-left left top-left //1 2 3 4 5 6 7 8
 
-        public Figure(Point p)
+        public Figure(Point p, char c)
         {
-            pos = p; 
+            pos = p;
+            color = c;
         }
 
         public abstract void move();

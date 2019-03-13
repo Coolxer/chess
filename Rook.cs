@@ -8,7 +8,7 @@ namespace chess
 {
     class Rook : Figure
     {
-        public Rook(Point p) : base(p)
+        public Rook(Point p, char c) : base(p, c)
         {
             value = 'R';
         }

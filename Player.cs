@@ -12,7 +12,6 @@ namespace chess
 
         public  Figure[] figures { get; set; }
         private char[] letters;
-        private Figure picked;
 
         public Player(char p)
         {
@@ -23,33 +22,33 @@ namespace chess
             {
                 color = ConsoleColor.Red;
 
-                figures[0] = new Rook(new Point("a8"));
-                figures[1] = new Knight(new Point("b8"));
-                figures[2] = new Bishop(new Point("c8"));
-                figures[3] = new Queen(new Point("d8"));
-                figures[4] = new King(new Point("e8"));
-                figures[5] = new Bishop(new Point("f8"));
-                figures[6] = new Knight(new Point("g8"));
-                figures[7] = new Rook(new Point("h8"));
+                figures[0] = new Rook(new Point("a8"), 'w');
+                figures[1] = new Knight(new Point("b8"), 'w');
+                figures[2] = new Bishop(new Point("c8"), 'w');
+                figures[3] = new Queen(new Point("d8"), 'w');
+                figures[4] = new King(new Point("e8"), 'w');
+                figures[5] = new Bishop(new Point("f8"), 'w');
+                figures[6] = new Knight(new Point("g8"), 'w');
+                figures[7] = new Rook(new Point("h8"), 'w');
 
                 for (int i = 8, j = 0; i < 16; i++, j++)
-                    figures[i] = new Pawn(new Point(letters[j].ToString() + '7'));
+                    figures[i] = new Pawn(new Point(letters[j].ToString() + '7'), 'w');
             }
             else if (p == 'b') // "black" -> blue
             {
                 color = ConsoleColor.Blue;
 
-                figures[0] = new Rook(new Point("a1"));
-                figures[1] = new Knight(new Point("b1"));
-                figures[2] = new Bishop(new Point("c1"));
-                figures[3] = new Queen(new Point("d1"));
-                figures[4] = new King(new Point("e1"));
-                figures[5] = new Bishop(new Point("f1"));
-                figures[6] = new Knight(new Point("g1"));
-                figures[7] = new Rook(new Point("h1"));
+                figures[0] = new Rook(new Point("a1"), 'b');
+                figures[1] = new Knight(new Point("b1"), 'b');
+                figures[2] = new Bishop(new Point("c1"), 'b');
+                figures[3] = new Queen(new Point("d1"), 'b');
+                figures[4] = new King(new Point("e1"), 'b');
+                figures[5] = new Bishop(new Point("f1"), 'b');
+                figures[6] = new Knight(new Point("g1"), 'b');
+                figures[7] = new Rook(new Point("h1"), 'b');
 
                 for (int i = 8, j = 0; i < 16; i++, j++)
-                    figures[i] = new Pawn(new Point(letters[j].ToString() + '2'));
+                    figures[i] = new Pawn(new Point(letters[j].ToString() + '2'), 'b');
             }
         }
 
@@ -61,11 +60,11 @@ namespace chess
             //first there should be question if chosen position is free of OWN figures (can hit and kill opposite == GOOD)
 
             //if free we are looking what figure we want to move
-            for(int i = 0; i < figures.Length; i++)
-            {
-                if (figures[i].pos == p)
-                    picked = figures[i];
-            }
+            //for(int i = 0; i < figures.Length; i++)
+            //{
+            //    if (figures[i].pos == p)
+            //        picked = figures[i];
+            //}
 
             //there we should check in if the move is possible( the restrictions of the figure movement -> king, pawn, rook etc.)
 

@@ -22,6 +22,8 @@ namespace chess
             board = new Board();
             w = new Player('w');
             b = new Player('b');
+
+            Judge.Instance.init(ref board, ref w, ref b);
         }
 
         public void run()
@@ -40,9 +42,7 @@ namespace chess
                 if (code == 0)
                     break;
                 else if(code == 1)
-                {
-                    Judge.Instance.consider(call);
-                }
+                    Console.WriteLine(Judge.Instance.consider(call));
             }
         }
     }

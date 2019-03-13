@@ -8,7 +8,7 @@ namespace chess
 {
     class King : Figure
     {
-        public King(Point p) : base(p)
+        public King(Point p, char c) : base(p, c)
         {
             value = 'K';
         }
@@ -20,7 +20,7 @@ namespace chess
 
         public override void allowMoves()
         {
-
+            
         }
     }
 }

@@ -8,15 +8,15 @@ namespace chess
 {
     public class Board
     {
-        public char[,] fields { get; set; }
+        public Figure[,] fields { get; set; }
 
         public Board()
         {
-            fields = new char[8, 8];
+            fields = new Figure [8, 8];
 
             for (int i = 0; i < 8; i++)
                 for (int j = 0; j < 8; j++)
-                    fields[i, j] = ' ';
+                    fields[i, j] = null;
         }
 
         public void draw()
@@ -42,8 +42,10 @@ namespace chess
                         else
                             Console.BackgroundColor = ConsoleColor.DarkGreen;
                     }
-
-                    Console.Write(" " + fields[i, j]);
+                    if (fields[i, j] == null)
+                        Console.Write("  ");
+                    else
+                        Console.Write(" " + fields[i, j].value);
 
                     Console.ResetColor();
                 }
@@ -54,18 +56,16 @@ namespace chess
 
         public void createGrid(Figure[] f1, Figure[] f2)
         {
-            Console.WriteLine(f1[0].pos.X + " " +  f1[0].pos.Y);
-
             for (int i = 0; i < f1.Length; i++)
-                fields[f1[i].pos.X, f1[i].pos.Y] = f1[i].value;
+                fields[f1[i].pos.X, f1[i].pos.Y] = f1[i];
 
             for (int i = 0; i < f2.Length; i++)
-                fields[f2[i].pos.X, f2[i].pos.Y] = f2[i].value;
+                fields[f2[i].pos.X, f2[i].pos.Y] = f2[i];
 
             draw();
         }
 
-        public char getField(Point pos)
+        public Figure getField(Point pos)
         {
             return fields[pos.X, pos.Y];
         }
