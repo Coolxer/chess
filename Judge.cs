@@ -10,6 +10,9 @@ namespace chess
     {
         private Board board;
         private Player w, b;
+        private Figure current;
+
+        private bool turn = false; // 0 - white player turn, 1 - black player turn 
 
         private static Judge judge;
 
@@ -26,18 +29,31 @@ namespace chess
             }
         }
 
-        public void Asdasd(ref Board board, ref Player w, ref Player b)
+        public void init(ref Board board, ref Player w, ref Player b)
         {
-
+            this.board = board;
+            this.w = w;
+            this.b = b;
         }
 
-        public void consider(String request)
+        public bool consider(String request)
         {
-            String fp, mp;
-            fp = request[0].ToString() + request[1].ToString();
-            mp = request[2].ToString() + request[3].ToString();
+            bool allow = true;
 
+            Point fp = new Point(request[0].ToString() + request[1].ToString());
+            Point mp = new Point(request[2].ToString() + request[3].ToString());
 
+            if (board.getField(fp) == '')
+                return false;
+
+            //for(int i = 0; i < board.fields.Length; i++)
+            //{
+            //    if(board)
+            //}
+
+            return true;
+
+            
 
         }
     }

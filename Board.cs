@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace chess
 {
-    class Board
+    public class Board
     {
-        private char[,] fields;
-        private ConsoleColor background;
+        public char[,] fields { get; set; }
 
         public Board()
         {
@@ -64,6 +63,11 @@ namespace chess
                 fields[f2[i].pos.X, f2[i].pos.Y] = f2[i].value;
 
             draw();
+        }
+
+        public char getField(Point pos)
+        {
+            return fields[pos.X, pos.Y];
         }
 
     }

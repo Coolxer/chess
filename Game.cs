@@ -14,8 +14,6 @@ namespace chess
         Player w;
         Player b;
 
-        bool turn = false; //white player turn
-
         bool redraw = true;
 
         public Game()

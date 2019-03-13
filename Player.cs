@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace chess
 {
-    class Player
+    public class Player
     {
         private ConsoleColor color;
 
