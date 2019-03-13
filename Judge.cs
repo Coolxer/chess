@@ -43,7 +43,7 @@ namespace chess
 
             current = board.getField(fp);
 
-            if (current == null || current.color != turn) //if user choose clear field to move or his opponent figure
+            if (current == null || current.color != turn) //if user chose clear field to move or his opponent figure
                 return false;
 
             if (board.getField(mp).color == current.color) //if user want to move its own figure above its own figure w to w, b to b

@@ -22,12 +22,12 @@ namespace chess
             Y = (int)s[0] - 97;
         }
 
-        public Point(int x, int y)
-        {
-            Y = Y;
-            X = this.x = Math.Abs(x - 8) ;
+        //public Point(int x, int y)
+        //{
+        //    Y = y;
+        //    X = this.x = Math.Abs(x - 8) ;
 
-            y = Convert.ToChar(Y + 97);
-        }
+        //    y = Convert.ToChar(Y + 97);
+        //}
     }
 }

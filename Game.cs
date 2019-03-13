@@ -42,7 +42,13 @@ namespace chess
                 if (code == 0)
                     break;
                 else if(code == 1)
-                    Console.WriteLine(Judge.Instance.consider(call));
+                {
+                    if(Judge.Instance.consider(call))
+                    {
+
+                    }
+                }
+                    ;
             }
         }
     }

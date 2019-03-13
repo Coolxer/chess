@@ -54,8 +54,8 @@ namespace chess
 
         public void move(string order)
         {
-            Point p = new Point(order[0], order[1]);
-            Point target = new Point(order[2], order[3]);
+            Point p = new Point(order[0].ToString() + order[1].ToString());
+            Point target = new Point(order[2].ToString() + order[3].ToString());
 
             //first there should be question if chosen position is free of OWN figures (can hit and kill opposite == GOOD)
 
