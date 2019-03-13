@@ -18,13 +18,10 @@ namespace chess
                 value = 'p';
         }
 
-        public override void move()
+        public override void generateAllowedMoves()
         {
-            
-        }
+            clearMatrix();
 
-        public override void allowMoves()
-        {
             if (firstMove)
             {
                 if (color == 'w')

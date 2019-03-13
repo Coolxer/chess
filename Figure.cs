@@ -24,15 +24,26 @@ namespace chess
 
             matrix = new bool[8, 8];
 
-            for (int i = 0; i < 8; i++)
-                for (int j = 0; j < 8; j++)
-                    matrix[i, j] = false;
+            clearMatrix();
 
             row = pos.Y;
             col = pos.X;
         }
 
-        public abstract void move();
-        public abstract void allowMoves();       
+        public void move(Point p)
+        {
+            pos = p;
+            row = p.X;
+            col = p.Y;
+        }
+
+        public void clearMatrix()
+        {
+            for (int i = 0; i < 8; i++)
+                for (int j = 0; j < 8; j++)
+                    matrix[i, j] = false;
+        }
+
+        public abstract void generateAllowedMoves();         
     }
 }

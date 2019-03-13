@@ -46,9 +46,16 @@ namespace chess
             if (current == null || current.color != turn) //if user chose clear field to move or his opponent figure
                 return false;
 
-            if (board.getField(mp).color == current.color) //if user want to move its own figure above its own figure w to w, b to b
+            if (board.fields[mp.X, mp.Y].color == current.color) //if user want to move its own figure above its own figure w to w, b to b
                 return false;
 
+            current.generateAllowedMoves();
+
+            if (current.matrix[mp.X, mp.Y])
+            {
+                board.fields[fp.X, fp.Y] = null;
+                current.move(mp);
+            }
             return true;
         }
     }

@@ -18,14 +18,11 @@ namespace chess
                 value = 'n';
         }
 
-        public override void move()
+        public override void generateAllowedMoves()
         {
+            clearMatrix();
 
-        }
-
-        public override void allowMoves()
-        {
-            if(row < 8 && col > 1)
+            if (row < 8 && col > 1)
                 matrix[row + 1, col - 2] = true;
 
             if(row < 7 && col > 0)

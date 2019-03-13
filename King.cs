@@ -17,15 +17,11 @@ namespace chess
                 value = 'k';
         }
 
-        public override void move()
+        public override void generateAllowedMoves()
         {
-            row = pos.X;
-            col = pos.Y;
-        }
+            clearMatrix();
 
-        public override void allowMoves()
-        {
-            if(row < 8 && col > 0)
+            if (row < 8 && col > 0)
                 matrix[row + 1, col - 1] = true;
 
             if(row < 8)

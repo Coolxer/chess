@@ -16,15 +16,12 @@ namespace chess
                 value = 'r';
         }
 
-        public override void move()
+        public override void generateAllowedMoves()
         {
-            
-        }
+            clearMatrix();
 
-        public override void allowMoves()
-        {
             //top
-            if(row < 8)
+            if (row < 8)
                 for (int i = row + 1; i < 8; i++)
                     matrix[i, col] = true;
 

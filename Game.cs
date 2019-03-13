@@ -41,14 +41,8 @@ namespace chess
 
                 if (code == 0)
                     break;
-                else if(code == 1)
-                {
-                    if(Judge.Instance.consider(call))
-                    {
-
-                    }
-                }
-                    ;
+                else if (code == 1)
+                    Judge.Instance.consider(call);      
             }
         }
     }
