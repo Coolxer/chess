@@ -25,13 +25,19 @@ namespace chess
             {
                 if (color == 'w')
                 {
-                    matrix[pos.X - 1, pos.Y] = true;
-                    matrix[pos.X - 2, pos.Y] = true;
+                    if(board.fields[pos.X - 1, pos.Y].color != color)
+                        matrix[pos.X - 1, pos.Y] = true;
+
+                    if (board.fields[pos.X - 2, pos.Y].color != color)
+                        matrix[pos.X - 2, pos.Y] = true;
                 }
                 else
                 {
-                    matrix[pos.X + 1, pos.Y] = true;
-                    matrix[pos.X + 2, pos.Y] = true;
+                    if (board.fields[pos.X + 1, pos.Y].color != color)
+                        matrix[pos.X + 1, pos.Y] = true;
+
+                    if (board.fields[pos.X + 2, pos.Y].color != color)
+                        matrix[pos.X + 2, pos.Y] = true;
                 }
                 firstMove = false;
             }
@@ -40,9 +46,16 @@ namespace chess
                 if(pos.X < 8)
                 {
                     if (color == 'w')
-                        matrix[pos.X - 1, pos.Y] = true;
+                    {
+                        if (board.fields[pos.X - 1, pos.Y].color != color)
+                            matrix[pos.X - 1, pos.Y] = true;
+                    }
                     else
-                        matrix[pos.X + 1, pos.Y] = true;
+                    {
+                        if (board.fields[pos.X + 1, pos.Y].color != color)
+                            matrix[pos.X + 1, pos.Y] = true;
+                    }
+                        
                 }
             }
 

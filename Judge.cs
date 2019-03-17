@@ -31,14 +31,19 @@ namespace chess
 
             current = board.fields[fp.X, fp.Y];
 
-            if (current == null || current.color != turn) //if user chose clear field to move or his opponent figure
+            //if user chose no figure (empty field)
+            if (current == null)
+                return false;
+
+            //if user chose no its own figure (opponent figure chosen)
+            if (current.color != turn)
                 return false;
 
             target = board.fields[mp.X, mp.Y];
 
-            if(target != null)
-                if (target.color == current.color) //if user want to move its own figure above its own figure w to w, b to b
-                    return false;
+            //if user want to move its own figure above its own figure w to w, b to b
+            if (target != null && target.color == current.color)
+                return false;
 
             current.generateAllowedMoves();
 

@@ -27,6 +27,12 @@ namespace chess
             w = new Player('w');
             b = new Player('b');
 
+            for(int i = 0; i < 16; i++)
+            {
+                w.figures[i].init(ref board);
+                b.figures[i].init(ref board);
+            }
+
             //Judge.Instance.init(ref board, ref w, ref b);
 
             judge = new Judge(ref board, ref w, ref b);

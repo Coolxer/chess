@@ -12,6 +12,8 @@ namespace chess
         public char value { get; set; }
         public char color { get; set; }
 
+        public Board board { get; }
+
         public bool[,] matrix; //top top-right right bottom-right bottom bottom-left left top-left //1 2 3 4 5 6 7 8
 
         public Figure(Point p, char c)
@@ -22,6 +24,11 @@ namespace chess
             matrix = new bool[8, 8];
 
             clearMatrix();
+        }
+
+        public void init(ref Board board)
+        {
+            this.board = board;
         }
 
         public void move(Point p)
