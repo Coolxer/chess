@@ -22,7 +22,7 @@ namespace chess
             if (pos.X < 7 && pos.Y < 8)
                 matrix[pos.X - 2, pos.Y + 1] = true;
 
-            if (pos.X < 8 && pos.Y < 7)s
+            if (pos.X < 8 && pos.Y < 7)
                 matrix[pos.X - 1, pos.Y + 2] = true;
 
             if(pos.X > 1 && pos.Y < 8)

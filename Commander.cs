@@ -13,6 +13,12 @@ namespace chess
 
             if (cmd.Length == 0)
                 return 2;
+            else if (cmd == "reset")
+                return 3;
+            else if (cmd == "hard_move")
+                return -1;
+            else if (cmd == "exit_hard_move")
+                return -2;
             else if (cmd == "exit" || cmd == "quit")
                 return 0;
             else if (cmd.Length == 4)

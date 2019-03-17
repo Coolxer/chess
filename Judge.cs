@@ -61,5 +61,22 @@ namespace chess
 
             return true;
         }
+
+        public void hardMove(String request)
+        {
+            Point fp = new Point(request[0].ToString() + request[1].ToString());
+            Point mp = new Point(request[2].ToString() + request[3].ToString());
+
+            current = board.fields[fp.X, fp.Y];
+
+            if (current == null)
+                return;
+
+            current.generateAllowedMoves();
+
+            board.fields[fp.X, fp.Y] = null;
+            current.move(mp);
+            board.fields[mp.X, mp.Y] = current;
+        }
     }
 }
