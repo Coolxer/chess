@@ -8,13 +8,17 @@ namespace chess
 {
     class Game
     {
-        Commander cmd;
+        private Commander cmd;
 
-        Board board;
-        Player w;
-        Player b;
+        private Board board;
+        private Player w;
+        private Player b;
+
+        private Judge judge;
 
         bool redraw = true;
+
+        private int[,] table;
 
         public Game()
         {
@@ -23,7 +27,21 @@ namespace chess
             w = new Player('w');
             b = new Player('b');
 
-            Judge.Instance.init(ref board, ref w, ref b);
+            //Judge.Instance.init(ref board, ref w, ref b);
+
+            judge = new Judge(ref board, ref w, ref b);
+
+            //table = new int[8, 8];
+
+            //for(int i = 0; i < 8; i++)
+            //{
+            //    for(int j = 0; j < 8; j++)
+            //    {
+            //        table[i, j] = (i * 8) + j;
+            //        Console.Write(" " + table[i, j]);
+            //    }
+            //    Console.WriteLine();
+            //}
         }
 
         public void run()
@@ -32,6 +50,9 @@ namespace chess
             {
                 if (redraw)
                 {
+                    //Console.Clear();
+                    Console.WriteLine();
+                    Console.WriteLine("Current turn: " + judge.turn);
                     board.createGrid(w.figures, b.figures);
                     redraw = false;
                 }
@@ -42,7 +63,11 @@ namespace chess
                 if (code == 0)
                     break;
                 else if (code == 1)
-                    Judge.Instance.consider(call);      
+                {
+                    if (judge.consider(call))
+                        redraw = true;
+                }
+                    //Judge.Instance.consider(call);      
             }
         }
     }

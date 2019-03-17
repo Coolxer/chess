@@ -30,23 +30,30 @@ namespace chess
                 {
                     if(i % 2 == 0)
                     {
-                        if(j % 2 == 0)
+                        if (j % 2 == 0)
                             Console.BackgroundColor = ConsoleColor.DarkGray;
                         else
                             Console.BackgroundColor = ConsoleColor.DarkGreen;
                     }
                     else
                     {
-                        if (j % 2 != 0)
-                            Console.BackgroundColor = ConsoleColor.DarkGray;
-                        else
+                        if (j % 2 == 0)
                             Console.BackgroundColor = ConsoleColor.DarkGreen;
+                        else
+                            Console.BackgroundColor = ConsoleColor.DarkGray;       
                     }
+
                     if (fields[i, j] == null)
                         Console.Write("  ");
                     else
-                        Console.Write(" " + fields[i, j].value);
+                    {
+                        if (fields[i, j].color == 'w')
+                            Console.ForegroundColor = ConsoleColor.White;
+                        else
+                            Console.ForegroundColor = ConsoleColor.Black;
 
+                        Console.Write(" " + fields[i, j].value);
+                    }      
                     Console.ResetColor();
                 }
                 Console.WriteLine();      
@@ -63,11 +70,6 @@ namespace chess
                 fields[f2[i].pos.X, f2[i].pos.Y] = f2[i];
 
             draw();
-        }
-
-        public Figure getField(Point pos)
-        {
-            return fields[pos.X, pos.Y];
         }
 
     }

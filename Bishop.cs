@@ -10,37 +10,47 @@ namespace chess
     {
         public Bishop(Point p, char c) : base(p, c)
         {
-            if (c == 'w')
-                value = 'B';
-            else
-                value = 'b';
+            value = 'B';
         }
 
         public override void generateAllowedMoves()
         {
             clearMatrix();
 
-            if (row < 8)
+            if (pos.X > 0)
             {
                 //left-top
-                for (int i = row + 1, j = col - 1; i < 8; i++, j--)
+                for (int i = pos.X - 1, j = pos.Y - 1; i > 0; i--, j--)
                     matrix[i, j] = true;
 
                 //right-top
-                for (int i = row + 1, j = col + 1; i < 8; i++, j++)
+                for (int i = pos.X - 1, j = pos.Y + 1; i > 0; i--, j++)
                     matrix[i, j] = true;
             }
 
-            if(row > 0)
+            if(pos.X < 8)
             {
                 //right-bottom
-                for (int i = row - 1, j = col + 1; i > 0; i--, j++)
+                for (int i = pos.X + 1, j = pos.Y + 1; i < 8; i++, j++)
                     matrix[i, j] = true;
 
                 //left-bottom
-                for (int i = row - 1, j = col - 1; i > 0; i--, j--)
+                for (int i = pos.X + 1, j = pos.Y - 1; i < 8; i++, j--)
                     matrix[i, j] = true;
-            }   
+            }
+
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    if (matrix[i, j])
+                        Console.Write('1');
+                    else
+                        Console.Write('0');
+                }
+
+                Console.WriteLine();
+            }
         }
     }
 }

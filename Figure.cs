@@ -14,9 +14,6 @@ namespace chess
 
         public bool[,] matrix; //top top-right right bottom-right bottom bottom-left left top-left //1 2 3 4 5 6 7 8
 
-        public int row { get; set; }
-        public int col { get; set; }
-
         public Figure(Point p, char c)
         {
             pos = p;
@@ -25,16 +22,11 @@ namespace chess
             matrix = new bool[8, 8];
 
             clearMatrix();
-
-            row = pos.Y;
-            col = pos.X;
         }
 
         public void move(Point p)
         {
             pos = p;
-            row = p.X;
-            col = p.Y;
         }
 
         public void clearMatrix()
@@ -42,6 +34,11 @@ namespace chess
             for (int i = 0; i < 8; i++)
                 for (int j = 0; j < 8; j++)
                     matrix[i, j] = false;
+        }
+
+        public void coord()
+        {
+            Console.WriteLine("[ " + pos.X + " , " + pos.Y + " ]");
         }
 
         public abstract void generateAllowedMoves();         

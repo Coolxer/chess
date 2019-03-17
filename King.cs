@@ -11,39 +11,49 @@ namespace chess
         //castling
         public King(Point p, char c) : base(p, c)
         {
-            if (c == 'w')
-                value = 'K';
-            else
-                value = 'k';
+            value = 'K';
         }
 
         public override void generateAllowedMoves()
         {
             clearMatrix();
 
-            if (row < 8 && col > 0)
-                matrix[row + 1, col - 1] = true;
+            if (pos.X > 0 && pos.Y > 0)
+                matrix[pos.X - 1, pos.Y - 1] = true;
 
-            if(row < 8)
-                matrix[row + 1, col] = true;
+            if(pos.X > 0)
+                matrix[pos.X - 1, pos.Y] = true;
 
-            if(row < 8 && col < 8 )
-                matrix[row + 1, col + 1] = true;
+            if(pos.X < 8 && pos.Y > 0)
+                matrix[pos.X - 1, pos.Y + 1] = true;
 
-            if(col > 0)
-                matrix[row, col - 1] = true;
+            if(pos.Y > 0)
+                matrix[pos.X, pos.Y - 1] = true;
 
-            if(col < 8)
-                matrix[row, col + 1] = true;
+            if(pos.Y < 7)
+                matrix[pos.X, pos.Y + 1] = true;
 
-            if(row > 0 && col > 0)
-                matrix[row - 1, col - 1] = true;
+            if(pos.X < 7  && pos.Y > 0)
+                matrix[pos.X + 1, pos.Y - 1] = true;
 
-            if(row > 0)
-                matrix[row - 1, col] = true;
+            if(pos.X < 7)
+                matrix[pos.X + 1, pos.Y] = true;
 
-            if(row > 0 && col < 8)
-                matrix[row - 1, col + 1] = true;
+            if(pos.X < 7 && pos.Y < 8)
+                matrix[pos.X + 1, pos.Y + 1] = true;
+
+            for(int i = 0; i < 8; i++)
+            {
+                for(int j = 0; j < 8; j++)
+                {
+                    if (matrix[i, j])
+                        Console.Write('1');
+                    else
+                        Console.Write('0');
+                }
+
+                Console.WriteLine();
+            }
         }
     }
 }

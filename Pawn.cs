@@ -9,13 +9,12 @@ namespace chess
     class Pawn : Figure
     {
         private bool firstMove = true;
+
         //special en pasant     promotion
+
         public Pawn(Point p, char c) : base(p, c)
         {
-            if (c == 'w')
-                value = 'P';
-            else
-                value = 'p';
+            value = 'P';
         }
 
         public override void generateAllowedMoves()
@@ -26,26 +25,39 @@ namespace chess
             {
                 if (color == 'w')
                 {
-                    matrix[row + 1, col] = true;
-                    matrix[row + 2, col] = true;
+                    matrix[pos.X - 1, pos.Y] = true;
+                    matrix[pos.X - 2, pos.Y] = true;
                 }
                 else
                 {
-                    matrix[row - 1, col] = true;
-                    matrix[row - 2, col] = true;
+                    matrix[pos.X + 1, pos.Y] = true;
+                    matrix[pos.X + 2, pos.Y] = true;
                 }
                 firstMove = false;
             }
             else
             {
-                if(row < 8)
+                if(pos.X < 8)
                 {
                     if (color == 'w')
-                        matrix[row + 1, col] = true;
+                        matrix[pos.X - 1, pos.Y] = true;
                     else
-                        matrix[row - 1, col] = true;
+                        matrix[pos.X + 1, pos.Y] = true;
                 }
-            }   
+            }
+
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    if (matrix[i, j])
+                        Console.Write('1');
+                    else
+                        Console.Write('0');
+                }
+
+                Console.WriteLine();
+            }
         }
     }
 }

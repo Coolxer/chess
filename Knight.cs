@@ -12,39 +12,49 @@ namespace chess
         //can flip over other pieces
         public Knight(Point p, char c) : base(p, c)
         {
-            if (c == 'w')
-                value = 'N';
-            else
-                value = 'n';
+            value = 'N';
         }
 
         public override void generateAllowedMoves()
         {
             clearMatrix();
 
-            if (row < 8 && col > 1)
-                matrix[row + 1, col - 2] = true;
+            if (pos.X < 7 && pos.Y < 8)
+                matrix[pos.X - 2, pos.Y + 1] = true;
 
-            if(row < 7 && col > 0)
-                matrix[row + 2, col - 1] = true;
+            if (pos.X < 8 && pos.Y < 7)
+                matrix[pos.X - 1, pos.Y + 2] = true;
 
-            if(row < 8 && col < 7)
-                matrix[row + 1, col + 2] = true;
+            if(pos.X > 1 && pos.Y < 8)
+                matrix[pos.X + 2, pos.Y + 1] = true;
 
-            if(row < 7 && col < 8)
-                matrix[row + 2, col + 1] = true;
+            if(pos.X > 0 && pos.Y < 7)
+                matrix[pos.X + 1, pos.Y + 2] = true;
 
-            if(row > 0 && col < 7)
-                matrix[row - 1, col + 2] = true;
+            if(pos.X > 1 && pos.Y > 0)
+                matrix[pos.X + 2, pos.Y - 1] = true;
 
-            if(row > 1 && col < 8)
-                matrix[row - 2, col + 1] = true;
+            if(pos.X > 0 && pos.Y > 1)
+                matrix[pos.X + 1, pos.Y - 2] = true;
 
-            if(row > 0 && col > 1)
-                matrix[row - 1, col - 2] = true;
+            if(pos.X < 7 && pos.Y > 0)
+                matrix[pos.X - 2, pos.Y - 1] = true;
 
-            if(row > 1 && col > 0)
-                matrix[row - 2, col - 1] = true;
+            if(pos.X < 8 && pos.Y > 1)
+                matrix[pos.X - 1, pos.Y - 2] = true;
+
+            for(int i = 0; i < 8; i++)
+            {
+                for(int j = 0; j < 8; j++)
+                {
+                    if (matrix[i, j])
+                        Console.Write('1');
+                    else
+                        Console.Write('0');
+                }
+
+                Console.WriteLine();
+            }
         }
     }
 }
