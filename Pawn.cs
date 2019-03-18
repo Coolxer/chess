@@ -27,18 +27,22 @@ namespace chess
                 if (color == 'w')
                 {
                     if(board.fields[pos.X - 1, pos.Y] == null || board.fields[pos.X - 1, pos.Y].color != color)
+                    {
                         matrix[pos.X - 1, pos.Y] = true;
 
-                    if (board.fields[pos.X - 1, pos.Y] == null && (board.fields[pos.X - 2, pos.Y] == null ||board.fields[pos.X - 2, pos.Y].color != color))
-                        matrix[pos.X - 2, pos.Y] = true;
+                        if (board.fields[pos.X - 2, pos.Y] == null || board.fields[pos.X - 2, pos.Y].color != color)
+                            matrix[pos.X - 2, pos.Y] = true;
+                    } 
                 }
                 else
                 {
                     if (board.fields[pos.X + 1, pos.Y] == null || board.fields[pos.X + 1, pos.Y].color != color)
+                    {
                         matrix[pos.X + 1, pos.Y] = true;
 
-                    if (board.fields[pos.X + 2, pos.Y] == null && (board.fields[pos.X + 2, pos.Y] == null || board.fields[pos.X - 2, pos.Y].color != color))
-                        matrix[pos.X + 2, pos.Y] = true;
+                        if (board.fields[pos.X + 2, pos.Y] == null || board.fields[pos.X - 2, pos.Y].color != color)
+                            matrix[pos.X + 2, pos.Y] = true;
+                    }  
                 }
 
                 firstMove = false;
@@ -56,8 +60,7 @@ namespace chess
                     {
                         if (board.fields[pos.X + 1, pos.Y] == null || board.fields[pos.X + 1, pos.Y].color != color)
                             matrix[pos.X + 1, pos.Y] = true;
-                    }
-                        
+                    }       
                 }
             }
 
