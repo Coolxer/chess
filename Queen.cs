@@ -18,36 +18,92 @@ namespace chess
             clearMatrix();
 
             if (pos.X < 8)
+            {
                 for (int i = pos.X + 1; i < 8; i++)
+                {
+                    if (board.fields[i, pos.Y] != null && board.fields[i, pos.Y].color == color)
+                        break;
+
                     matrix[i, pos.Y] = true;
+                }
+            }
 
-            if(pos.X < 8 && pos.Y < 8)
+
+            if (pos.X < 8 && pos.Y < 8)
+            {
                 for (int i = pos.X + 1, j = pos.Y + 1; i < 8; i++, j++)
-                    matrix[i, j] = true;
+                {
+                    if (board.fields[i, j] != null && board.fields[i, j].color == color)
+                        break;
 
-            if(pos.Y < 8)
+                    matrix[i, j] = true;
+                }     
+            }
+
+            if (pos.Y < 8)
+            {
                 for (int i = pos.Y + 1; i < 8; i++)
+                {
+                    if (board.fields[i, pos.Y] != null && board.fields[i, pos.Y].color == color)
+                        break;
+
                     matrix[pos.X, i] = true;
+                }      
+            }
 
             if(pos.X > 0 && pos.Y < 8)
+            {
                 for (int i = pos.X - 1, j = pos.Y + 1; i > 0; i--, j++)
+                {
+                    if (board.fields[i, j] != null && board.fields[i, j].color == color)
+                        break;
+
                     matrix[i, j] = true;
+                } 
+            }
+                
 
             if(pos.X > 0)
+            {
                 for (int i = pos.X - 1; i > 0; i--)
+                {
+                    if (board.fields[i, pos.Y] != null && board.fields[i, pos.Y].color == color)
+                        break;
+
                     matrix[i, pos.Y] = true;
+                }  
+            }
+                
 
             if(pos.X > 0 && pos.Y > 0)
+            {
                 for (int i = pos.X - 1, j = pos.Y - 1; i > 0; i--, j--)
+                {
+                    if (board.fields[i, j] != null && board.fields[i, j].color == color)
+                        break;
+
                     matrix[i, j] = true;
+                }    
+            }
+                
 
             if(pos.Y > 0)
+            {
                 for (int i = pos.Y - 1; i > 0; i--)
+                {
                     matrix[pos.X, i] = true;
+                }
+            }
+                
 
             if(pos.X < 8 && pos.Y > 0)
+            {
                 for (int i = pos.X + 1, j = pos.Y - 1; i < 8; i++, j--)
+                {
                     matrix[i, j] = true;
+                }  
+            }
+                
 
             for (int i = 0; i < 8; i++)
             {
