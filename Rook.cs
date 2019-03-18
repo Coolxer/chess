@@ -68,18 +68,7 @@ namespace chess
                 }
             }
 
-            for (int i = 0; i < 8; i++)
-            {
-                for (int j = 0; j < 8; j++)
-                {
-                    if (matrix[i, j])
-                        Console.Write('1');
-                    else
-                        Console.Write('0');
-                }
-
-                Console.WriteLine();
-            }
+            show();
         }
     }
 }

@@ -48,6 +48,29 @@ namespace chess
             Console.WriteLine("[ " + pos.X + " , " + pos.Y + " ]");
         }
 
-        public abstract void generateAllowedMoves();         
+        public abstract void generateAllowedMoves();      
+        
+        public void show()
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    if (matrix[i, j])
+                    {
+                        Console.BackgroundColor = ConsoleColor.Red;
+                        Console.Write('1');
+                    }
+
+                    else
+                    {
+                        Console.ResetColor();
+                        Console.Write('0');
+                    }
+                }
+
+                Console.WriteLine();
+            }
+        }
     }
 }

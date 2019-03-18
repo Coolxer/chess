@@ -43,18 +43,7 @@ namespace chess
             if(pos.X < 8 && pos.Y > 1)
                 matrix[pos.X - 1, pos.Y - 2] = true;
 
-            for(int i = 0; i < 8; i++)
-            {
-                for(int j = 0; j < 8; j++)
-                {
-                    if (matrix[i, j])
-                        Console.Write('1');
-                    else
-                        Console.Write('0');
-                }
-
-                Console.WriteLine();
-            }
+            show();
         }
     }
 }
