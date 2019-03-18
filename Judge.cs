@@ -72,11 +72,13 @@ namespace chess
             if (current == null)
                 return;
 
-            current.generateAllowedMoves();
+            //current.generateAllowedMoves();
 
             board.fields[fp.X, fp.Y] = null;
             current.move(mp);
             board.fields[mp.X, mp.Y] = current;
+
+            current.generateAllowedMoves();
         }
     }
 }
