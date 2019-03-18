@@ -8,7 +8,7 @@ namespace chess
 {
     class Queen : Figure
     {
-        public Queen(Point p, char c) : base(p, c)
+        public Queen(Point p, char c, int id) : base(p, c, id)
         {
             value = 'Q';
         }

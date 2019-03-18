@@ -51,6 +51,17 @@ namespace chess
             {
                 board.fields[fp.X, fp.Y] = null;
                 current.move(mp);
+
+                if(target != null)
+                {
+                    Console.WriteLine("skuty");
+
+                    if (turn == 'w')
+                        b.figures[target.id] = null;
+                    else
+                        w.figures[target.id] = null; 
+                }
+
                 board.fields[mp.X, mp.Y] = current;
             }
 

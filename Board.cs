@@ -64,11 +64,17 @@ namespace chess
         public void createGrid(Figure[] f1, Figure[] f2)
         {
             for (int i = 0; i < f1.Length; i++)
-                fields[f1[i].pos.X, f1[i].pos.Y] = f1[i];
-
+            {
+                if(f1[i] != null)
+                    fields[f1[i].pos.X, f1[i].pos.Y] = f1[i];
+            }
+               
             for (int i = 0; i < f2.Length; i++)
-                fields[f2[i].pos.X, f2[i].pos.Y] = f2[i];
-
+            {
+                if(f2[i] != null)
+                    fields[f2[i].pos.X, f2[i].pos.Y] = f2[i];
+            }
+                
             draw();
         }
 

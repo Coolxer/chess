@@ -12,7 +12,7 @@ namespace chess
 
         //special en pasant     promotion
 
-        public Pawn(Point p, char c) : base(p, c)
+        public Pawn(Point p, char c, int id) : base(p, c, id)
         {
             value = 'P';
         }

@@ -22,33 +22,33 @@ namespace chess
             {
                 color = ConsoleColor.Red;
 
-                figures[0] = new Rook(new Point("a1"), 'w');
-                figures[1] = new Knight(new Point("b1"), 'w');
-                figures[2] = new Bishop(new Point("c1"), 'w');
-                figures[3] = new Queen(new Point("d1"), 'w');
-                figures[4] = new King(new Point("e1"), 'w');
-                figures[5] = new Bishop(new Point("f1"), 'w');
-                figures[6] = new Knight(new Point("g1"), 'w');
-                figures[7] = new Rook(new Point("h1"), 'w');
+                figures[0] = new Rook(new Point("a1"), 'w', 0);
+                figures[1] = new Knight(new Point("b1"), 'w', 1);
+                figures[2] = new Bishop(new Point("c1"), 'w', 2);
+                figures[3] = new Queen(new Point("d1"), 'w', 3);
+                figures[4] = new King(new Point("e1"), 'w', 4);
+                figures[5] = new Bishop(new Point("f1"), 'w', 5);
+                figures[6] = new Knight(new Point("g1"), 'w', 6);
+                figures[7] = new Rook(new Point("h1"), 'w', 7);
 
                 for (int i = 8, j = 0; i < 16; i++, j++)
-                    figures[i] = new Pawn(new Point(letters[j].ToString() + '2'), 'w');  
+                    figures[i] = new Pawn(new Point(letters[j].ToString() + '2'), 'w', i);  
             }
             else if (p == 'b') // "black" -> blue
             {
                 color = ConsoleColor.Blue;
 
-                figures[0] = new Rook(new Point("a8"), 'b');
-                figures[1] = new Knight(new Point("b8"), 'b');
-                figures[2] = new Bishop(new Point("c8"), 'b');
-                figures[3] = new Queen(new Point("d8"), 'b');
-                figures[4] = new King(new Point("e8"), 'b');
-                figures[5] = new Bishop(new Point("f8"), 'b');
-                figures[6] = new Knight(new Point("g8"), 'b');
-                figures[7] = new Rook(new Point("h8"), 'b');
+                figures[0] = new Rook(new Point("a8"), 'b', 0);
+                figures[1] = new Knight(new Point("b8"), 'b', 1);
+                figures[2] = new Bishop(new Point("c8"), 'b', 2);
+                figures[3] = new Queen(new Point("d8"), 'b', 3);
+                figures[4] = new King(new Point("e8"), 'b', 4);
+                figures[5] = new Bishop(new Point("f8"), 'b', 5);
+                figures[6] = new Knight(new Point("g8"), 'b', 6);
+                figures[7] = new Rook(new Point("h8"), 'b', 7);
 
                 for (int i = 8, j = 0; i < 16; i++, j++)
-                    figures[i] = new Pawn(new Point(letters[j].ToString() + '7'), 'b');
+                    figures[i] = new Pawn(new Point(letters[j].ToString() + '7'), 'b', i);
             }
         }
 

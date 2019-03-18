@@ -9,7 +9,7 @@ namespace chess
     class King : Figure
     {
         //castling
-        public King(Point p, char c) : base(p, c)
+        public King(Point p, char c, int id) : base(p, c, id)
         {
             value = 'K';
         }

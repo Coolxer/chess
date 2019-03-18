@@ -10,7 +10,7 @@ namespace chess
     {
 
         //can flip over other pieces
-        public Knight(Point p, char c) : base(p, c)
+        public Knight(Point p, char c, int id) : base(p, c, id)
         {
             value = 'N';
         }

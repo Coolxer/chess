@@ -11,15 +11,18 @@ namespace chess
         public Point pos { get; set; }
         public char value { get; set; }
         public char color { get; set; }
+        public int id { get; set; }
 
         public Board board { get; set; }
 
         public bool[,] matrix; //top top-right right bottom-right bottom bottom-left left top-left //1 2 3 4 5 6 7 8
 
-        public Figure(Point p, char c)
+
+        public Figure(Point p, char c, int id)
         {
             pos = p;
             color = c;
+            this.id = id;
 
             matrix = new bool[8, 8];
 
