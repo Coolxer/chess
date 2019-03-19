@@ -52,24 +52,36 @@ namespace chess
                 board.fields[fp.X, fp.Y] = null;
                 current.move(mp);
 
+                //removed hit figure
                 if(target != null)
-                {
-                    Console.WriteLine("skuty");
-
+                { 
                     if (turn == 'w')
-                        b.figures[target.id] = null;
+                        b.figures[target.id] = null;   
                     else
                         w.figures[target.id] = null; 
                 }
 
+                //check if the pawn should be promoted
+                if (turn == 'w')
+                {
+                    turn = 'b';
+
+                    if (current.value == 'P' && current.pos.X == 0)
+                        w.figures[current.id] = new Queen(current.pos, 'w', current.id);
+                        
+                }
+                else
+                {
+                    turn = 'w';
+
+                    if (current.value == 'P' && current.pos.X == 7)
+                        b.figures[current.id] = new Queen(current.pos, 'b', current.id);
+                }
+                    
+
                 board.fields[mp.X, mp.Y] = current;
             }
-
-            if (turn == 'w')
-                turn = 'b';
-            else
-                turn = 'w';
-
+           
             return true;
         }
 

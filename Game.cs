@@ -64,7 +64,7 @@ namespace chess
             {
                 if (redraw)
                 {
-                    //Console.Clear();
+                    Console.Clear();
                     Console.WriteLine();
 
                     if(!hard)
