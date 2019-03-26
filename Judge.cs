@@ -9,11 +9,11 @@ namespace chess
     public class Judge
     {
         private Board board;
-        private Player w, b;
+        private Player w, b, c, nc;
         private Figure current = null;
         private Figure target = null;
 
-        public char turn { get; set; } // 0 - white player turn, 1 - black player turn 
+        public char turn { get; set; }
 
         public Judge(ref Board board, ref Player w, ref Player b)
         {
@@ -21,10 +21,44 @@ namespace chess
             this.w = w;
             this.b = b;
 
-            turn = 'w';
+            c = w;
+            nc = b;
+
+            turn = c.color;
         }
 
-        public bool consider(String request)
+        public void helpMe(String cmd)
+        {
+            Point p = new Point(cmd);
+
+            current = board.fields[p.X, p.Y];
+
+            if (current == null)
+                return;
+
+            if (current.color != c.color)
+                return;
+
+            current.generateAllowedMoves();
+
+            Console.WriteLine("possible movements: ");
+
+            for (int i = 0; i < 8; i++ )
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    if (current.matrix[i, j])
+                    {
+                        Point pt = new Point(i, j);
+                        Console.Write(" " + pt.x + pt.y);
+                    }
+                }    
+            }
+
+            Console.WriteLine();        
+        }
+
+        public int rating(String request)
         {
             Point fp = new Point(request[0].ToString() + request[1].ToString());
             Point mp = new Point(request[2].ToString() + request[3].ToString());
@@ -33,17 +67,17 @@ namespace chess
 
             //if user chose no figure (empty field)
             if (current == null)
-                return false;
+                return 0;
 
             //if user chose no its own figure (opponent figure chosen)
-            if (current.color != turn)
-                return false;
+            if (current.color != c.color)
+                return 0;
 
             target = board.fields[mp.X, mp.Y];
 
             //if user want to move its own figure above its own figure w to w, b to b
             if (target != null && target.color == current.color)
-                return false;
+                return 0;
 
             current.generateAllowedMoves();
 
@@ -54,54 +88,45 @@ namespace chess
 
                 //removed hit figure
                 if(target != null)
-                { 
-                    if (turn == 'w')
-                        b.figures[target.id] = null;   
-                    else
-                        w.figures[target.id] = null; 
-                }
+                    c.figures.RemoveAt(current.id);
 
-                //check if the pawn should be promoted
-                if (turn == 'w')
+                c.movements++;
+
+                if(nc.movements >= 2)
                 {
-                    turn = 'b';
+                    c.figures[4].generateAllowedMoves();
 
-                    if (current.value == 'P' && current.pos.X == 0)
-                        w.figures[current.id] = new Queen(current.pos, 'w', current.id);
-                        
-                }
-                else
-                {
-                    turn = 'w';
+                    foreach (Figure f in c.figures)
+                        f.generateAllowedMoves();
 
-                    if (current.value == 'P' && current.pos.X == 7)
-                        b.figures[current.id] = new Queen(current.pos, 'b', current.id);
+                    for (int i = 0; i < 8; i++)
+                    {
+                        for (int j = 0; j < 8; j++)
+                        {
+                            for (int z = 0; z < nc.figures.Count; z++)
+                            {
+                                if (c.figures[4].matrix[i, j] && !nc.figures[z].matrix[i, j])
+                                    return 2;
+                            }
+                        }
+                    }
                 }
-                    
+                
+                int n = (c.color == 'w') ? 0 : 7;
+                
+                if (current.value == 'P' && current.pos.X == n)
+                    c.figures[current.id] = new Queen(current.pos, c.color, current.id);
 
                 board.fields[mp.X, mp.Y] = current;
+
+                Player p = c;
+                c = nc;
+                nc = p;
+
+                turn = c.color;
             }
-           
-            return true;
-        }
 
-        public void hardMove(String request)
-        {
-            Point fp = new Point(request[0].ToString() + request[1].ToString());
-            Point mp = new Point(request[2].ToString() + request[3].ToString());
-
-            current = board.fields[fp.X, fp.Y];
-
-            if (current == null)
-                return;
-
-            //current.generateAllowedMoves();
-
-            board.fields[fp.X, fp.Y] = null;
-            current.move(mp);
-            board.fields[mp.X, mp.Y] = current;
-
-            current.generateAllowedMoves();
+            return 1;
         }
     }
 }

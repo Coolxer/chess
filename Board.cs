@@ -61,20 +61,20 @@ namespace chess
             Console.WriteLine("---------------------");
         }
 
-        public void createGrid(Figure[] f1, Figure[] f2)
+        public void createGrid(List <Figure> f1, List <Figure> f2)
         {
-            for (int i = 0; i < f1.Length; i++)
+            foreach(Figure f in f1)
             {
-                if(f1[i] != null)
-                    fields[f1[i].pos.X, f1[i].pos.Y] = f1[i];
+                if(f != null)
+                    fields[f.pos.X, f.pos.Y] = f;
             }
-               
-            for (int i = 0; i < f2.Length; i++)
+
+            foreach (Figure f in f2)
             {
-                if(f2[i] != null)
-                    fields[f2[i].pos.X, f2[i].pos.Y] = f2[i];
+                if (f != null)
+                    fields[f.pos.X, f.pos.Y] = f;
             }
-                
+
             draw();
         }
 

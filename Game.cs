@@ -16,9 +16,7 @@ namespace chess
 
         private Judge judge;
 
-        bool redraw = true;
-
-        private bool hard = false;
+        private bool redraw = true;
 
         public Game()
         {
@@ -54,16 +52,8 @@ namespace chess
                 {
                     Console.Clear();
                     Console.WriteLine();
+                    Console.WriteLine("Current turn: " + judge.turn);
 
-                    if(!hard)
-                        Console.WriteLine("Current turn: " + judge.turn);
-                    else
-                    {
-                        Console.BackgroundColor = ConsoleColor.Red;
-                        Console.WriteLine("HARD MOVE MODE");
-                        Console.ResetColor();
-                    }
-                       
                     board.createGrid(w.figures, b.figures);
                     redraw = false;
                 }
@@ -75,20 +65,21 @@ namespace chess
                     break;
                 else if (code == 3)
                     reset();
-                else if (code == -1)
-                    hard = true;
-                else if (code == -2)
-                    hard = false;
+                else if (code == 4)
+                    judge.helpMe(call);
                 else if (code == 1)
                 {
-                    if (hard)
-                    {
-                        judge.hardMove(call);
-                        redraw = true;
-                    }
+                    int result = judge.rating(call);
 
-                    if (judge.consider(call))
+                    if (result == 1)
                         redraw = true;
+                    else if(result == 2)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("End of the game! " + judge.turn + " win!");
+                        Console.WriteLine();
+                        Console.WriteLine("Type quit to close OR reset to play again!");
+                    }
                 }
                     //Judge.Instance.consider(call);      
             }
