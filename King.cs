@@ -54,7 +54,7 @@ namespace chess
                         matrix[pos.X + 1, pos.Y + 1] = true;
             }
 
-            show();
+            //show();
         }
     }
 }

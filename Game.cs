@@ -14,9 +14,13 @@ namespace chess
         private Player w;
         private Player b;
 
+        //private AI ai;
+
         private Judge judge;
 
         private bool redraw = true;
+
+        private int callback;
 
         public Game()
         {
@@ -58,30 +62,42 @@ namespace chess
                     redraw = false;
                 }
 
-                String call = Console.ReadLine();
-                int code = cmd.process(call);
-
-                if (code == 0)
-                    break;
-                else if (code == 3)
-                    reset();
-                else if (code == 4)
-                    judge.helpMe(call);
-                else if (code == 1)
+                //callback = judge.rating(b.randomize());
+                if (judge.ai && judge.turn == 'b')
                 {
-                    int result = judge.rating(call);
+                    callback = judge.rating(b.randomize());
+                }   
+                else
+                {
+                    String call = Console.ReadLine();
+                    int code = cmd.process(call);
 
-                    if (result == 1)
-                        redraw = true;
-                    else if(result == 2)
-                    {
-                        Console.Clear();
-                        Console.WriteLine("End of the game! " + judge.turn + " win!");
-                        Console.WriteLine();
-                        Console.WriteLine("Type quit to close OR reset to play again!");
-                    }
+                    if (code == 0)
+                        break;
+                    else if (code == 3)
+                        reset();
+                    else if (code == 4)
+                        judge.helpMe(call);
+                    else if (code == 10)
+                        judge.ai = true;
+                    else if (code == 1)
+                        callback = judge.rating(call);
                 }
-                    //Judge.Instance.consider(call);      
+                
+                if (callback == 1)
+                {
+                    redraw = true;
+                    callback = 0;
+                } 
+                else if (callback == 2)
+                {
+                    Console.Clear();
+                    Console.WriteLine("End of the game! " + judge.turn + " win!");
+                    Console.WriteLine();
+                    Console.WriteLine("Type quit to close OR reset to play again!");
+
+                    callback = 0;
+                }
             }
         }
     }

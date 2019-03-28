@@ -69,7 +69,7 @@ namespace chess
                 }
             }
 
-            show();
+            //show();
         }
     }
 }

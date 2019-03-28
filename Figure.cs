@@ -17,7 +17,6 @@ namespace chess
 
         public bool[,] matrix; //top top-right right bottom-right bottom bottom-left left top-left //1 2 3 4 5 6 7 8
 
-
         public Figure(Point p, char c, int id)
         {
             pos = p;

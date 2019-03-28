@@ -23,7 +23,6 @@ namespace chess
 
             if (firstMove)
             {
-                coord();
                 if (color == 'w')
                 {
                     if(board.fields[pos.X - 1, pos.Y] == null || board.fields[pos.X - 1, pos.Y].color != color)
@@ -64,7 +63,7 @@ namespace chess
                 }
             }
 
-            show();
+            //show();
         }
     }
 }

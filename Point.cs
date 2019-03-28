@@ -31,7 +31,7 @@ namespace chess
             Y = y;
 
             this.x = (char)(y + 97);
-            this.y = (char)(x + 47);
+            this.y = (char)(56 - x);
         }
 
         //public Point(int x, int y)

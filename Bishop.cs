@@ -83,7 +83,7 @@ namespace chess
                 }
             }
 
-            show();
+            //show();
         }
     }
 }
