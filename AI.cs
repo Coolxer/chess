@@ -8,199 +8,213 @@ namespace chess
 {
     class AI : Player
     {
-        public Point fp { get; set; }
-        public Point mp { get; set; }
-        public String cm { get; set; }
-
         private Board bo;
         private Player b;
 
-        List<Figure> availables;
+        private Random random;
+        private List<String> availablesMoves;
 
         private Point lastPos;
 
+        private int value = 0;
+        private bool own = true;
+
+        public String bestMove { get; set; }
+
         public AI(char c, ref Board bo) : base(c)
         {
-            availables = new List<Figure>();
+            availablesMoves = new List<String>();
+
+            random = new Random();
+
             this.bo = bo;
         }
 
         private void generate()
         {
+            if (availablesMoves.Count > 0)
+                availablesMoves.Clear();
+
             foreach (Figure f in figures)
+            {
                 f.generateAllowedMoves();
 
-            for (int z = 0; z < figures.Count; z++)
-            {
-                for (int i = 0; i < 8; i++)
+                if(f.moves.Count > 0)
                 {
-                    for (int j = 0; j < 8; j++)
-                    {
-                        if (figures[z].matrix[i, j])
-                        {
-                            availables.Add(figures[z]);
-                            i = j = 8;
-                            break;
-                        }
-                    }
+                    foreach (String s in f.moves)
+                        availablesMoves.Add(s);
                 }
+            }
+
+            shuffle();
+        }
+
+        private void shuffle()
+        {
+            int n = availablesMoves.Count;
+
+            while (n > 1)
+            {
+                n--;
+                int k = random.Next(n + 1);
+
+                String value = availablesMoves[k];
+                availablesMoves[k] = availablesMoves[n];
+                availablesMoves[n] = value;
             }
         }
 
         public String randomize()
         {
-            Random random = new Random();
+            int k = random.Next(0, availablesMoves.Count);
 
-            //randomize the figure for which will be generated possible moves
-            int fg = random.Next(0, availables.Count - 1);
-
-            List<Point> poses = new List<Point>();
-
-            for (int i = 0; i < 8; i++)
-            {
-                for (int j = 0; j < 8; j++)
-                {
-                    if (availables[fg].matrix[i, j])
-                        poses.Add(new Point(i, j));
-                }
-            }
-
-            int ng = random.Next(0, poses.Count - 1);
-
-            fp = availables[fg].pos;
-            mp = poses[ng];
-
-            cm = fp.x.ToString() + fp.y.ToString() + mp.x.ToString() + mp.y.ToString();
-
-            return cm;
+            return availablesMoves[k];
         }
 
-        public String evaluation()
+        private int evaluateBoard()
         {
-            int max = 0;
-            Point pos = new Point();
-            Point mv = new Point();
-            //Figure _f = new Figure('b') ;
-
-            foreach (Figure fig in availables)
-            {
-                for(int i = 0; i < 8; i++)
-                {
-                    for(int j = 0; j < 8; j++)
-                    {
-                        if(fig.matrix[i,j])
-                        {
-                            for(int z = 0; z < b.figures.Count; z++)
-                            {
-                                Point p = new Point(i, j);
-
-                                if (b.figures[z].pos != p)
-                                    continue;
-
-                                if(b.figures[z].value > max)
-                                {
-                                    max = b.figures[z].value;
-                                    pos = p;
-                                    mv = b.figures[z].pos;
-                                    //_f = fig;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (max == 0)
-                randomize();
-
-            String s = pos.x.ToString() + pos.y.ToString() + mv.x.ToString() + mv.y.ToString();
-
-            return s;
-        }
-
-        private int calcValue()
-        {
-            int value = 0;
-
-            generate();
+            int var = 0;
 
             for(int i = 0; i < 8; i++)
             {
                 for(int j = 0; j < 8; j++)
                 {
-                    if(bo.fields[i, j] != null)
+                    Figure f = bo.fields[i, j];
+
+                    if(f != null)
                     {
-                        if (bo.fields[i, j].color == 'b')
-                            value += bo.fields[i, j].value;
+                        if (f.color == 'w')
+                            var += f.value;
                         else
-                            value -= bo.fields[i, j].value;
+                            var -= f.value;
                     }
                 }
+            }
+
+            return var;
+        }
+
+        public String calcBestMoveOne()
+        {
+            generate();
+
+            String best = "";
+            int bestMoveValue = Int32.MinValue;
+
+            foreach(String s in availablesMoves)
+            {
+                lastPos = new Point(s[0], s[1]);
+
+                Figure f = bo.fields[lastPos.X, lastPos.Y];
+
+                f.move(new Point(s[2], s[3]));
+
+                value = evaluateBoard();
+
+                if(value > bestMoveValue)
+                {
+                    best = s;
+                    bestMoveValue = value;
+                }
+
+                f.move(lastPos);
+            }
+
+            return best;                  
+        }
+
+        public int calcAB(int depth, bool own)
+        {
+            if(depth == 0)
+                return evaluateBoard();
+
+            int bestMoveValue = Int32.MinValue;
+
+            generate();   
+
+            foreach( String s in availablesMoves)
+            {
+                lastPos = new Point(s[0], s[1]);
+
+                Figure f = bo.fields[lastPos.X, lastPos.Y];
+
+                f.move(new Point(s[2], s[3]));
+
+                value = calcAB(depth - 1, !own);
+
+                if(own)
+                {
+                    if(value > bestMoveValue)
+                    {
+                        bestMove = s;
+                        bestMoveValue = value;
+                    }
+                }
+                else
+                {
+                    if(value < bestMoveValue)
+                    {
+                        bestMove = s;
+                        bestMoveValue = value;
+                    }
+                }
+
+                f.move(lastPos);
             }
 
             return value;
         }
 
-        public String chooseBestMove()
+        public int calcBestMove(int depth, int alpha, int beta, bool own)
         {
-            int moveValue;
-            int bestValue = Int32.MinValue;
+            if (depth == 0)
+                return evaluateBoard();
 
-            String bestMove = "";
+            generate();
 
-            for (int i = 0; i < 8; i++)
+            int bestMoveValue;
+
+            if (own)
+                bestMoveValue = Int32.MinValue;
+            else
+                bestMoveValue = Int32.MaxValue;
+
+            foreach(String s in availablesMoves)
             {
-                for (int j = 0; j < 8; j++)
+                lastPos = new Point(s[0], s[1]);
+
+                Figure f = bo.fields[lastPos.X, lastPos.Y];
+
+                f.move(new Point(s[2], s[3]));
+
+                value = calcBestMove(depth - 1, alpha, beta, !own);
+
+                if (own)
                 {
-                    if (bo.fields[i, j] != null)
+                    if (value > bestMoveValue)
                     {
-                        Figure f = bo.fields[i, j];
-
-                        f.generateAllowedMoves();
-
-                        for (int x = 0; x < 8; x++)
-                        {
-                            for (int y = 0; y < 8; y++)
-                            {
-                                if (f.matrix[x, y])
-                                {
-                                    Point m = new Point(x, y);
-
-                                    lastPos = bo.fields[i, j].pos;
-                                    f.move(m);
-                                    moveValue = calcValue();
-
-                                    if(moveValue > bestValue)
-                                    {
-                                        bestMove = lastPos.x.ToString() + lastPos.y.ToString() + m.x.ToString() + m.y.ToString();
-                                        bestValue = moveValue;
-                                    }
-
-                                    f.move(lastPos);
-                                }
-                            }
-                        }
-                    }     
+                        bestMove = s;
+                        bestMoveValue = value;
+                    }
                 }
+                else
+                {
+                    if (value < bestMoveValue)
+                    {
+                        bestMove = s;
+                        bestMoveValue = value;
+                    }
+
+                    beta = Math.Min(beta, value);
+                }
+
+                f.move(lastPos);
+
+                if (beta <= alpha)
+                    break;
             }
 
-            return bestMove;
-                            
+            return value;
         }
-
-        public void minimax()
-        {
-            int depth = 3;
-
-            int v;
-
-            if (depth == 0)
-                v = calcValue();
-
-
-
-        }
-
-
     }
 }

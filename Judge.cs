@@ -29,9 +29,6 @@ namespace chess
             turn = c.color;
 
             ai = true; //wil be false there 
-
-            lastPos = new Point();
-            lastMove = new Point();
         }
 
         public void helpMe(String cmd)
@@ -50,17 +47,8 @@ namespace chess
 
             Console.WriteLine("possible movements: ");
 
-            for (int i = 0; i < 8; i++ )
-            {
-                for (int j = 0; j < 8; j++)
-                {
-                    if (current.matrix[i, j])
-                    {
-                        Point pt = new Point(i, j);
-                        Console.Write(" " + pt.x + pt.y);
-                    }
-                }    
-            }
+            foreach (String s in current.moves)
+                Console.Write(" " + s);
 
             Console.WriteLine();        
         }

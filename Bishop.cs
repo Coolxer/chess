@@ -32,6 +32,8 @@ namespace chess
                             break;
 
                         matrix[i, j] = true;
+
+                        moves.Add(String.Concat(pos.coords(), new Point(i, j).coords()));
                     } 
                 }
 
@@ -47,6 +49,8 @@ namespace chess
                             break;
 
                         matrix[i, j] = true;
+
+                        moves.Add(String.Concat(pos.coords(), new Point(i, j).coords()));
                     }
                 } 
             }
@@ -65,6 +69,8 @@ namespace chess
                             break;
 
                         matrix[i, j] = true;
+
+                        moves.Add(String.Concat(pos.coords(), new Point(i, j).coords()));
                     }
                 }
 
@@ -80,6 +86,8 @@ namespace chess
                             break;
 
                         matrix[i, j] = true;
+
+                        moves.Add(String.Concat(pos.coords(), new Point(i, j).coords()));
                     }
                 }
             }

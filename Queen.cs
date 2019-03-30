@@ -31,6 +31,7 @@ namespace chess
                             break;
 
                         matrix[i, j] = true;
+                        moves.Add(String.Concat(pos.coords(), new Point(i, j).coords()));
                     }
                 }
 
@@ -40,6 +41,8 @@ namespace chess
                         break;
 
                     matrix[i, pos.Y] = true;
+
+                    moves.Add(String.Concat(pos.coords(), new Point(i, pos.Y).coords()));
                 }
 
                 if (pos.Y < 7)
@@ -53,6 +56,8 @@ namespace chess
                             break;
 
                         matrix[i, j] = true;
+
+                        moves.Add(String.Concat(pos.coords(), new Point(i, j).coords()));
                     }
                 }
             }
@@ -66,6 +71,8 @@ namespace chess
                         break;
 
                     matrix[pos.X, j] = true;
+
+                    moves.Add(String.Concat(pos.coords(), new Point(pos.X, j).coords()));
                 }
             }
 
@@ -77,6 +84,8 @@ namespace chess
                         break;
 
                     matrix[pos.X, j] = true;
+
+                    moves.Add(String.Concat(pos.coords(), new Point(pos.X, j).coords()));
                 }
             }
 
@@ -93,6 +102,8 @@ namespace chess
                             break;
 
                         matrix[i, j] = true;
+
+                        moves.Add(String.Concat(pos.coords(), new Point(i, j).coords()));
                     }
                 }
 
@@ -102,6 +113,8 @@ namespace chess
                         break;
 
                     matrix[i, pos.Y] = true;
+
+                    moves.Add(String.Concat(pos.coords(), new Point(i, pos.Y).coords()));
                 }
 
                 if(pos.Y > 0)
@@ -115,6 +128,8 @@ namespace chess
                             break;
 
                         matrix[i, j] = true;
+
+                        moves.Add(String.Concat(pos.coords(), new Point(i, j).coords()));
                     }
                 }
 

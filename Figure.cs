@@ -16,7 +16,9 @@ namespace chess
 
         public Board board { get; set; }
 
-        public bool[,] matrix; //top top-right right bottom-right bottom bottom-left left top-left //1 2 3 4 5 6 7 8
+        public bool[,] matrix;
+
+        public List<String> moves;
 
         public Figure() { }
 
@@ -27,6 +29,8 @@ namespace chess
             this.id = id;
 
             matrix = new bool[8, 8];
+
+            moves = new List<string>();
 
             clearMatrix();
         }
@@ -46,11 +50,8 @@ namespace chess
             for (int i = 0; i < 8; i++)
                 for (int j = 0; j < 8; j++)
                     matrix[i, j] = false;
-        }
 
-        public void coord()
-        {
-            Console.WriteLine("[ " + pos.X + " , " + pos.Y + " ]");
+            moves.Clear();
         }
 
         public abstract void generateAllowedMoves();      

@@ -29,9 +29,13 @@ namespace chess
                     if(board.fields[pos.X - 1, pos.Y] == null || board.fields[pos.X - 1, pos.Y].color != color)
                     {
                         matrix[pos.X - 1, pos.Y] = true;
+                        moves.Add(String.Concat(pos.coords(), new Point(pos.X - 1, pos.Y).coords()));
 
                         if (board.fields[pos.X - 2, pos.Y] == null || board.fields[pos.X - 2, pos.Y].color != color)
+                        {
                             matrix[pos.X - 2, pos.Y] = true;
+                            moves.Add(String.Concat(pos.coords(), new Point(pos.X - 2, pos.Y).coords()));
+                        }      
                     } 
                 }
                 else
@@ -39,9 +43,14 @@ namespace chess
                     if (board.fields[pos.X + 1, pos.Y] == null || board.fields[pos.X + 1, pos.Y].color != color)
                     {
                         matrix[pos.X + 1, pos.Y] = true;
+                        moves.Add(String.Concat(pos.coords(), new Point(pos.X + 1, pos.Y).coords()));
 
                         if (board.fields[pos.X + 2, pos.Y] == null || board.fields[pos.X - 2, pos.Y].color != color)
+                        {
                             matrix[pos.X + 2, pos.Y] = true;
+                            moves.Add(String.Concat(pos.coords(), new Point(pos.X + 2, pos.Y).coords()));
+                        }
+                           
                     }  
                 }
 
@@ -54,12 +63,19 @@ namespace chess
                     if (color == 'w')
                     {
                         if (board.fields[pos.X - 1, pos.Y] == null || board.fields[pos.X - 1, pos.Y].color != color)
+                        {
                             matrix[pos.X - 1, pos.Y] = true;
+                            moves.Add(String.Concat(pos.coords(), new Point(pos.X - 1, pos.Y).coords()));
+                        }      
                     }
                     else
                     {
                         if (board.fields[pos.X + 1, pos.Y] == null || board.fields[pos.X + 1, pos.Y].color != color)
+                        {
                             matrix[pos.X + 1, pos.Y] = true;
+                            moves.Add(String.Concat(pos.coords(), new Point(pos.X + 1, pos.Y).coords()));
+                        }
+                            
                     }       
                 }
             }

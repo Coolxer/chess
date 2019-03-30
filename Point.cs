@@ -36,6 +36,11 @@ namespace chess
             this.y = (char)(56 - x);
         }
 
+        public String coords()
+        {
+            return x.ToString() + y.ToString();
+        }
+
         //public Point(int x, int y)
         //{
         //    Y = y;
