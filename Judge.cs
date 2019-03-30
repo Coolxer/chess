@@ -29,6 +29,9 @@ namespace chess
             turn = c.color;
 
             ai = true; //wil be false there 
+
+            lastPos = new Point();
+            lastMove = new Point();
         }
 
         public void helpMe(String cmd)
@@ -105,7 +108,7 @@ namespace chess
                 
             int n = (c.color == 'w') ? 0 : 7;
                 
-            if (current.value == 'P' && current.pos.X == n)
+            if (current.type == 'P' && current.pos.X == n)
                 c.figures[current.id] = new Queen(current.pos, c.color, current.id);
 
             board.fields[mp.X, mp.Y] = current;

@@ -10,7 +10,8 @@ namespace chess
     {
         public Queen(Point p, char c, int id) : base(p, c, id)
         {
-            value = 'Q';
+            type = 'Q';
+            value = 90;
         }
 
         public override void generateAllowedMoves()

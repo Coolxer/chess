@@ -52,7 +52,7 @@ namespace chess
                         else
                             Console.ForegroundColor = ConsoleColor.Black;
 
-                        Console.Write(" " + fields[i, j].value);
+                        Console.Write(" " + fields[i, j].type);
                     }      
                     Console.ResetColor();
                 }

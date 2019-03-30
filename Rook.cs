@@ -10,7 +10,8 @@ namespace chess
     {
         public Rook(Point p, char c, int id) : base(p, c, id)
         {
-            value = 'R';
+            type = 'R';
+            value = 50;
         }
 
         public override void generateAllowedMoves()

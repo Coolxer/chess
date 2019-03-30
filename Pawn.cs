@@ -14,7 +14,8 @@ namespace chess
 
         public Pawn(Point p, char c, int id) : base(p, c, id)
         {
-            value = 'P';
+            type = 'P';
+            value = 10;
         }
 
         public override void generateAllowedMoves()

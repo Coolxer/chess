@@ -14,6 +14,8 @@ namespace chess
         public int X { get; set; }
         public int Y { get; set; }
 
+        public Point() { }
+
         public Point(String s)
         {
             s.ToLower();

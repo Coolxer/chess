@@ -11,7 +11,8 @@ namespace chess
         //castling
         public King(Point p, char c, int id) : base(p, c, id)
         {
-            value = 'K';
+            type = 'K';
+            value = 900;
         }
 
         public override void generateAllowedMoves()

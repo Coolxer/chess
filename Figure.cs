@@ -9,13 +9,16 @@ namespace chess
     public abstract class Figure
     {
         public Point pos { get; set; }
-        public char value { get; set; }
+        public int value { get; set; }
+        public char type { get; set; }
         public char color { get; set; }
         public int id { get; set; }
 
         public Board board { get; set; }
 
         public bool[,] matrix; //top top-right right bottom-right bottom bottom-left left top-left //1 2 3 4 5 6 7 8
+
+        public Figure() { }
 
         public Figure(Point p, char c, int id)
         {

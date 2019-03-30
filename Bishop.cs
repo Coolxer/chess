@@ -10,7 +10,8 @@ namespace chess
     {
         public Bishop(Point p, char c, int id) : base(p, c, id)
         {
-            value = 'B';
+            type = 'B';
+            value = 30;
         }
 
         public override void generateAllowedMoves()

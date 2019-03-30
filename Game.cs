@@ -14,8 +14,6 @@ namespace chess
         private Player w;
         private Player b;
 
-        //private AI ai;
-
         private Judge judge;
 
         private bool redraw = true;
