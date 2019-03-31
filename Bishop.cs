@@ -8,10 +8,14 @@ namespace chess
 {
     class Bishop : Figure
     {
-        public Bishop(Point p, char c, int id) : base(p, c, id)
+        public Bishop(ref Board board, Point p, char c, int id) : base(ref board, p, c, id)
         {
             type = 'B';
-            value = 30;
+
+            if (c == 'w')
+                value = 30;
+            else
+                value = -30;
         }
 
         public override void generateAllowedMoves()

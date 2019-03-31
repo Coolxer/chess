@@ -22,11 +22,13 @@ namespace chess
 
         public Figure() { }
 
-        public Figure(Point p, char c, int id)
+        public Figure(ref Board board, Point p, char c, int id)
         {
             pos = p;
             color = c;
             this.id = id;
+
+            this.board = board;
 
             matrix = new bool[8, 8];
 

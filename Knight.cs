@@ -10,10 +10,14 @@ namespace chess
     {
 
         //can flip over other pieces
-        public Knight(Point p, char c, int id) : base(p, c, id)
+        public Knight(ref Board board, Point p, char c, int id) : base(ref board, p, c, id)
         {
             type = 'N';
-            value = 30;
+
+            if (c == 'w')
+                value = 30;
+            else
+                value = -30;
         }
 
         public override void generateAllowedMoves()

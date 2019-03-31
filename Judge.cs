@@ -81,25 +81,25 @@ namespace chess
                     return 0;
             }
 
-            board.fields[fp.X, fp.Y] = null;
-
-            current.move(mp);
-
             //removed hit figure
             if (target != null)
                 nc.figures.RemoveAt(current.id);
 
+            current.move(mp);
+
+            board.fields[fp.X, fp.Y] = null;
+
             c.movements++;
+
+            board.fields[mp.X, mp.Y] = current;
 
             //if (checkForMate())
             //    return 2;
-                
-            int n = (c.color == 'w') ? 0 : 7;
-                
-            if (current.type == 'P' && current.pos.X == n)
-                c.figures[current.id] = new Queen(current.pos, c.color, current.id);
 
-            board.fields[mp.X, mp.Y] = current;
+            //int n = (c.color == 'w') ? 0 : 7;
+
+            //if (current.type == 'P' && current.pos.X == n)
+            //    c.figures[current.id] = new Queen(current.pos, c.color, current.id);
 
             Player p = c;
             c = nc;

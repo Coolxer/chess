@@ -8,10 +8,14 @@ namespace chess
 {
     class Queen : Figure
     {
-        public Queen(Point p, char c, int id) : base(p, c, id)
+        public Queen(ref Board board, Point p, char c, int id) : base(ref board, p, c, id)
         {
             type = 'Q';
-            value = 90;
+
+            if (c == 'w')
+                value = 90;
+            else
+                value = -90;
         }
 
         public override void generateAllowedMoves()

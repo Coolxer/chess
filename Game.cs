@@ -30,8 +30,8 @@ namespace chess
         private void reset()
         {
             board = new Board();
-            w = new Player('w');
-            b = new Player('b');
+            w = new Player('w', ref board);
+            b = new Player('b', ref board);
 
             for (int i = 0; i < 16; i++)
             {
@@ -63,7 +63,12 @@ namespace chess
                 //callback = judge.rating(b.randomize());
                 if (judge.ai && judge.turn == 'b')
                 {
-                    callback = judge.rating(b.randomize());
+                    //callback = judge.rating(b.randomize());
+                    //callback = judge.rating(b.calcBestMoveOne());
+
+                    b.calcBestMoveOne();
+
+                    callback = judge.rating(b.bestMove);
                 }   
                 else
                 {

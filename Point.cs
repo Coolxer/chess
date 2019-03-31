@@ -16,6 +16,15 @@ namespace chess
 
         public Point() { }
 
+        public Point(char x, char y)
+        {
+            this.x = x;
+            this.y = y;
+
+            X = (int)((char.GetNumericValue(y)) - 8) * -1;
+            Y = x - 97;
+        }
+
         public Point(String s)
         {
             s.ToLower();

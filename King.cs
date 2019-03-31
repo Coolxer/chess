@@ -9,10 +9,14 @@ namespace chess
     class King : Figure
     {
         //castling
-        public King(Point p, char c, int id) : base(p, c, id)
+        public King(ref Board board, Point p, char c, int id) : base(ref board, p, c, id)
         {
             type = 'K';
-            value = 900;
+
+            if (c == 'w')
+                value = 900;
+            else
+                value = -900;
         }
 
         public override void generateAllowedMoves()

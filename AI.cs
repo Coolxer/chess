@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace chess
 {
-    class AI : Player
+    public class AI
     {
-        private Board bo;
-        private Player b;
-
         private Random random;
         private List<String> availablesMoves;
 
@@ -21,15 +18,14 @@ namespace chess
 
         public String bestMove { get; set; }
 
-        public AI(char c, ref Board bo) : base(c)
+        public AI(char c)
         {
             availablesMoves = new List<String>();
 
             random = new Random();
-
-            this.bo = bo;
         }
 
+        /*
         private void generate()
         {
             if (availablesMoves.Count > 0)
@@ -66,6 +62,8 @@ namespace chess
 
         public String randomize()
         {
+            generate();
+
             int k = random.Next(0, availablesMoves.Count);
 
             return availablesMoves[k];
@@ -79,7 +77,7 @@ namespace chess
             {
                 for(int j = 0; j < 8; j++)
                 {
-                    Figure f = bo.fields[i, j];
+                    Figure f = board.fields[i, j];
 
                     if(f != null)
                     {
@@ -105,7 +103,7 @@ namespace chess
             {
                 lastPos = new Point(s[0], s[1]);
 
-                Figure f = bo.fields[lastPos.X, lastPos.Y];
+                Figure f = board.fields[lastPos.X, lastPos.Y];
 
                 f.move(new Point(s[2], s[3]));
 
@@ -136,7 +134,7 @@ namespace chess
             {
                 lastPos = new Point(s[0], s[1]);
 
-                Figure f = bo.fields[lastPos.X, lastPos.Y];
+                Figure f = board.fields[lastPos.X, lastPos.Y];
 
                 f.move(new Point(s[2], s[3]));
 
@@ -183,7 +181,7 @@ namespace chess
             {
                 lastPos = new Point(s[0], s[1]);
 
-                Figure f = bo.fields[lastPos.X, lastPos.Y];
+                Figure f = board.fields[lastPos.X, lastPos.Y];
 
                 f.move(new Point(s[2], s[3]));
 
@@ -216,5 +214,6 @@ namespace chess
 
             return value;
         }
+        */
     }
 }

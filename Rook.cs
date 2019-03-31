@@ -8,10 +8,14 @@ namespace chess
 {
     class Rook : Figure
     {
-        public Rook(Point p, char c, int id) : base(p, c, id)
+        public Rook(ref Board board, Point p, char c, int id) : base(ref board, p, c, id)
         {
             type = 'R';
-            value = 50;
+
+            if (c == 'w')
+                value = 50;
+            else
+                value = -50;
         }
 
         public override void generateAllowedMoves()
