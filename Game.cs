@@ -60,12 +60,8 @@ namespace chess
                     redraw = false;
                 }
 
-                //callback = judge.rating(b.randomize());
                 if (judge.ai && judge.turn == 'b')
                 {
-                    //callback = judge.rating(b.randomize());
-                    //callback = judge.rating(b.calcBestMoveOne());
-
                     b.calcBestMoveOne();
 
                     callback = judge.rating(b.bestMove);

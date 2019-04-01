@@ -12,7 +12,7 @@ namespace chess
 
         //special en pasant     promotion
 
-        public Pawn(ref Board board, Point p, char c, int id) : base(ref board, p, c, id)
+        public Pawn(ref Board board, Point p, char c) : base(ref board, p, c)
         {
             type = 'P';
 
@@ -35,11 +35,14 @@ namespace chess
                         matrix[pos.X - 1, pos.Y] = true;
                         moves.Add(String.Concat(pos.coords(), new Point(pos.X - 1, pos.Y).coords()));
 
-                        if (board.fields[pos.X - 2, pos.Y] == null || board.fields[pos.X - 2, pos.Y].color != color)
+                        if(board.fields[pos.X - 1, pos.Y] == null)
                         {
-                            matrix[pos.X - 2, pos.Y] = true;
-                            moves.Add(String.Concat(pos.coords(), new Point(pos.X - 2, pos.Y).coords()));
-                        }      
+                            if (board.fields[pos.X - 2, pos.Y] == null || board.fields[pos.X - 2, pos.Y].color != color)
+                            {
+                                matrix[pos.X - 2, pos.Y] = true;
+                                moves.Add(String.Concat(pos.coords(), new Point(pos.X - 2, pos.Y).coords()));
+                            }
+                        }         
                     } 
                 }
                 else
@@ -49,10 +52,13 @@ namespace chess
                         matrix[pos.X + 1, pos.Y] = true;
                         moves.Add(String.Concat(pos.coords(), new Point(pos.X + 1, pos.Y).coords()));
 
-                        if (board.fields[pos.X + 2, pos.Y] == null || board.fields[pos.X - 2, pos.Y].color != color)
+                        if (board.fields[pos.X + 1, pos.Y] == null)
                         {
-                            matrix[pos.X + 2, pos.Y] = true;
-                            moves.Add(String.Concat(pos.coords(), new Point(pos.X + 2, pos.Y).coords()));
+                            if (board.fields[pos.X + 2, pos.Y] == null || board.fields[pos.X - 2, pos.Y].color != color)
+                            {
+                                matrix[pos.X + 2, pos.Y] = true;
+                                moves.Add(String.Concat(pos.coords(), new Point(pos.X + 2, pos.Y).coords()));
+                            }
                         }
                            
                     }  

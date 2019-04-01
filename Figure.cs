@@ -22,11 +22,10 @@ namespace chess
 
         public Figure() { }
 
-        public Figure(ref Board board, Point p, char c, int id)
+        public Figure(ref Board board, Point p, char c)
         {
             pos = p;
             color = c;
-            this.id = id;
 
             this.board = board;
 

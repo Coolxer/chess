@@ -16,6 +16,8 @@ namespace chess
 
         public char color { get; set; }
 
+        public Figure king { get; set; }
+
         public  List <Figure> figures { get; set; }
 
         public int movements { get; set; }
@@ -46,36 +48,38 @@ namespace chess
 
             if (c == 'w')
             {
-                figures.Add(new Rook(ref board, new Point("a1"), 'w', 0));
-                figures.Add(new Knight(ref board, new Point("b1"), 'w', 1));
-                figures.Add(new Bishop(ref board, new Point("c1"), 'w', 2));
-                figures.Add(new Queen(ref board, new Point("d1"), 'w', 3));
-                figures.Add(new King(ref board, new Point("e1"), 'w', 4));
-                figures.Add(new Bishop(ref board, new Point("f1"), 'w', 5));
-                figures.Add(new Knight(ref board, new Point("g1"), 'w', 6));
-                figures.Add(new Rook(ref board, new Point("h1"), 'w', 7));
+                figures.Add(new Rook(ref board, new Point("a1"), 'w'));
+                figures.Add(new Knight(ref board, new Point("b1"), 'w'));
+                figures.Add(new Bishop(ref board, new Point("c1"), 'w'));
+                figures.Add(new Queen(ref board, new Point("d1"), 'w'));
+                figures.Add(new King(ref board, new Point("e1"), 'w'));
+                figures.Add(new Bishop(ref board, new Point("f1"), 'w'));
+                figures.Add(new Knight(ref board, new Point("g1"), 'w'));
+                figures.Add(new Rook(ref board, new Point("h1"), 'w'));
 
                 for (int i = 8, j = 0; i < 16; i++, j++)
-                    figures.Add(new Pawn(ref board, new Point(letters[j].ToString() + '2'), 'w', i));  
+                    figures.Add(new Pawn(ref board, new Point(letters[j].ToString() + '2'), 'w'));  
             }
             else if (c == 'b')
             {
-                figures.Add(new Rook(ref board, new Point("a8"), 'b', 0));
-                figures.Add(new Knight(ref board, new Point("b8"), 'b', 1));
-                figures.Add(new Bishop(ref board, new Point("c8"), 'b', 2));
-                figures.Add(new Queen(ref board, new Point("d8"), 'b', 3));
-                figures.Add(new King(ref board, new Point("e8"), 'b', 4));
-                figures.Add(new Bishop(ref board, new Point("f8"), 'b', 5));
-                figures.Add(new Knight(ref board, new Point("g8"), 'b', 6));
-                figures.Add(new Rook(ref board, new Point("h8"), 'b', 7));
+                figures.Add(new Rook(ref board, new Point("a8"), 'b'));
+                figures.Add(new Knight(ref board, new Point("b8"), 'b'));
+                figures.Add(new Bishop(ref board, new Point("c8"), 'b'));
+                figures.Add(new Queen(ref board, new Point("d8"), 'b'));
+                figures.Add(new King(ref board, new Point("e8"), 'b'));
+                figures.Add(new Bishop(ref board, new Point("f8"), 'b'));
+                figures.Add(new Knight(ref board, new Point("g8"), 'b'));
+                figures.Add(new Rook(ref board, new Point("h8"), 'b'));
 
                 for (int i = 8, j = 0; i < 16; i++, j++)
-                    figures.Add(new Pawn(ref board, new Point(letters[j].ToString() + '7'), 'b', i));
+                    figures.Add(new Pawn(ref board, new Point(letters[j].ToString() + '7'), 'b'));
 
                 availablesMoves = new List<String>();
 
                 random = new Random();
             }
+
+            king = figures[4];
         }
 
         /**********************************************************************/

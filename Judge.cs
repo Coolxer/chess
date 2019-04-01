@@ -28,7 +28,7 @@ namespace chess
 
             turn = c.color;
 
-            ai = true; //wil be false there 
+            ai = false; //wil be false there 
         }
 
         public void helpMe(String cmd)
@@ -83,23 +83,29 @@ namespace chess
 
             //removed hit figure
             if (target != null)
-                nc.figures.RemoveAt(current.id);
+            {
+                nc.figures.Remove(target);
+                board.fields[mp.X, mp.Y] = null;
+            }
 
             current.move(mp);
+            board.fields[mp.X, mp.Y] = current;
 
             board.fields[fp.X, fp.Y] = null;
 
             c.movements++;
 
-            board.fields[mp.X, mp.Y] = current;
+            if (checkForMate())
+                return 2;
 
-            //if (checkForMate())
-            //    return 2;
+            int n = (c.color == 'w') ? 0 : 7;
 
-            //int n = (c.color == 'w') ? 0 : 7;
-
-            //if (current.type == 'P' && current.pos.X == n)
-            //    c.figures[current.id] = new Queen(current.pos, c.color, current.id);
+            if (current.type == 'P' && current.pos.X == n)
+            {
+                int z = c.figures.IndexOf(current);
+                c.figures[z] = new Queen(ref board, current.pos, c.color);
+            }
+                
 
             Player p = c;
             c = nc;
@@ -116,22 +122,44 @@ namespace chess
         {
             if (nc.movements >= 2)
             {
-                c.figures[4].generateAllowedMoves();
+                nc.king.generateAllowedMoves();
 
-                foreach (Figure f in nc.figures)
-                    f.generateAllowedMoves();
-
-                for (int i = 0; i < 8; i++)
+                if (nc.king.moves.Count == 0)
                 {
-                    for (int j = 0; j < 8; j++)
+                    foreach (Figure f in c.figures)
                     {
-                        for (int z = 0; z < nc.figures.Count; z++)
+                        foreach (String move in f.moves)
                         {
-                            if (c.figures[4].matrix[i, j] && !nc.figures[z].matrix[i, j])
+                            if (move.Contains(nc.king.pos.coords()))
                                 return true;
                         }
                     }
                 }
+                else
+                {
+                    foreach (Figure f in c.figures)
+                    {
+                        f.generateAllowedMoves();
+
+                        foreach (String move in f.moves)
+                        {
+                            for (int i = 0; i < nc.king.moves.Count; i++)
+                            {
+                                String movement = nc.king.moves[i];
+
+                                String s = String.Concat(movement[2], movement[3]);
+
+                                if (move.Contains(s))
+                                    nc.king.moves.Remove(movement);
+                            }
+                        }
+                    }
+
+                    if (nc.king.moves.Count == 0)
+                        return true;
+                }
+
+                return false;
             }
 
             return false;

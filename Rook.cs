@@ -8,7 +8,7 @@ namespace chess
 {
     class Rook : Figure
     {
-        public Rook(ref Board board, Point p, char c, int id) : base(ref board, p, c, id)
+        public Rook(ref Board board, Point p, char c) : base(ref board, p, c)
         {
             type = 'R';
 
@@ -33,6 +33,9 @@ namespace chess
                     matrix[i, pos.Y] = true;
 
                     moves.Add(String.Concat(pos.coords(), new Point(i, pos.Y).coords()));
+
+                    if (board.fields[i, pos.Y] != null && board.fields[i, pos.Y].color != color)
+                        break;
                 }   
             }
                 
@@ -48,6 +51,9 @@ namespace chess
                     matrix[pos.X, i] = true;
 
                     moves.Add(String.Concat(pos.coords(), new Point(pos.X, i).coords()));
+
+                    if (board.fields[pos.X, i] != null && board.fields[pos.X, i].color != color)
+                        break;
                 }     
             }
                 
@@ -63,6 +69,9 @@ namespace chess
                     matrix[i, pos.Y] = true;
 
                     moves.Add(String.Concat(pos.coords(), new Point(i, pos.Y).coords()));
+
+                    if (board.fields[i, pos.Y] != null && board.fields[i, pos.Y].color != color)
+                        break;
                 }         
             }
                 
@@ -78,6 +87,9 @@ namespace chess
                     matrix[pos.X, i] = true;
 
                     moves.Add(String.Concat(pos.coords(), new Point(pos.X, i).coords()));
+
+                    if (board.fields[pos.X, i] != null && board.fields[pos.X, i].color != color)
+                        break;
                 }
             }
 

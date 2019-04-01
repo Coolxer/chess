@@ -9,7 +9,7 @@ namespace chess
     class King : Figure
     {
         //castling
-        public King(ref Board board, Point p, char c, int id) : base(ref board, p, c, id)
+        public King(ref Board board, Point p, char c) : base(ref board, p, c)
         {
             type = 'K';
 

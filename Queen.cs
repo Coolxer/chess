@@ -8,7 +8,7 @@ namespace chess
 {
     class Queen : Figure
     {
-        public Queen(ref Board board, Point p, char c, int id) : base(ref board, p, c, id)
+        public Queen(ref Board board, Point p, char c) : base(ref board, p, c)
         {
             type = 'Q';
 
@@ -36,6 +36,9 @@ namespace chess
 
                         matrix[i, j] = true;
                         moves.Add(String.Concat(pos.coords(), new Point(i, j).coords()));
+
+                        if (board.fields[i, j] != null && board.fields[i, j].color != color)
+                            break;
                     }
                 }
 
@@ -47,6 +50,9 @@ namespace chess
                     matrix[i, pos.Y] = true;
 
                     moves.Add(String.Concat(pos.coords(), new Point(i, pos.Y).coords()));
+
+                    if (board.fields[i, pos.Y] != null && board.fields[i, pos.Y].color != color)
+                        break;
                 }
 
                 if (pos.Y < 7)
@@ -62,6 +68,9 @@ namespace chess
                         matrix[i, j] = true;
 
                         moves.Add(String.Concat(pos.coords(), new Point(i, j).coords()));
+
+                        if (board.fields[i, j] != null && board.fields[i, j].color != color)
+                            break;
                     }
                 }
             }
@@ -77,6 +86,9 @@ namespace chess
                     matrix[pos.X, j] = true;
 
                     moves.Add(String.Concat(pos.coords(), new Point(pos.X, j).coords()));
+
+                    if (board.fields[pos.X, j] != null && board.fields[pos.X, j].color != color)
+                        break;
                 }
             }
 
@@ -90,6 +102,9 @@ namespace chess
                     matrix[pos.X, j] = true;
 
                     moves.Add(String.Concat(pos.coords(), new Point(pos.X, j).coords()));
+
+                    if (board.fields[pos.X, j] != null && board.fields[pos.X, j].color != color)
+                        break;
                 }
             }
 
@@ -108,6 +123,9 @@ namespace chess
                         matrix[i, j] = true;
 
                         moves.Add(String.Concat(pos.coords(), new Point(i, j).coords()));
+
+                        if (board.fields[i, j] != null && board.fields[i, j].color != color)
+                            break;
                     }
                 }
 
@@ -119,6 +137,9 @@ namespace chess
                     matrix[i, pos.Y] = true;
 
                     moves.Add(String.Concat(pos.coords(), new Point(i, pos.Y).coords()));
+
+                    if (board.fields[i, pos.Y] != null && board.fields[i, pos.Y].color != color)
+                        break;
                 }
 
                 if(pos.Y > 0)
@@ -134,6 +155,9 @@ namespace chess
                         matrix[i, j] = true;
 
                         moves.Add(String.Concat(pos.coords(), new Point(i, j).coords()));
+
+                        if (board.fields[i, j] != null && board.fields[i, j].color != color)
+                            break;
                     }
                 }
 

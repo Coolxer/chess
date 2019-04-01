@@ -8,7 +8,7 @@ namespace chess
 {
     class Bishop : Figure
     {
-        public Bishop(ref Board board, Point p, char c, int id) : base(ref board, p, c, id)
+        public Bishop(ref Board board, Point p, char c) : base(ref board, p, c)
         {
             type = 'B';
 
@@ -38,6 +38,9 @@ namespace chess
                         matrix[i, j] = true;
 
                         moves.Add(String.Concat(pos.coords(), new Point(i, j).coords()));
+
+                        if (board.fields[i, j] != null && board.fields[i, j].color != color)
+                            break;
                     } 
                 }
 
@@ -55,6 +58,9 @@ namespace chess
                         matrix[i, j] = true;
 
                         moves.Add(String.Concat(pos.coords(), new Point(i, j).coords()));
+
+                        if (board.fields[i, j] != null && board.fields[i, j].color != color)
+                            break;
                     }
                 } 
             }
@@ -75,6 +81,9 @@ namespace chess
                         matrix[i, j] = true;
 
                         moves.Add(String.Concat(pos.coords(), new Point(i, j).coords()));
+
+                        if (board.fields[i, j] != null && board.fields[i, j].color != color)
+                            break;
                     }
                 }
 
@@ -92,6 +101,9 @@ namespace chess
                         matrix[i, j] = true;
 
                         moves.Add(String.Concat(pos.coords(), new Point(i, j).coords()));
+
+                        if (board.fields[i, j] != null && board.fields[i, j].color != color)
+                            break;
                     }
                 }
             }
