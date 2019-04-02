@@ -14,7 +14,6 @@ namespace chess
         private Figure target = null;
 
         public bool ai { get; set; }
-
         public char turn { get; set; }
 
         public Judge(ref Board board, ref Player w, ref Player b)
@@ -28,10 +27,10 @@ namespace chess
 
             turn = c.color;
 
-            ai = false; //wil be false there 
+            ai = false; 
         }
 
-        public void helpMe(String cmd)
+        public void showPossibleMoves(String cmd)
         {
             Point p = new Point(cmd);
 
@@ -45,10 +44,16 @@ namespace chess
 
             current.generateAllowedMoves();
 
+            Console.WriteLine();
             Console.WriteLine("possible movements: ");
 
             foreach (String s in current.moves)
                 Console.Write(" " + s);
+
+            current.showThruthTable();
+
+            if (current.moves.Count == 0)
+                Console.WriteLine("No possible moves for this figure");
 
             Console.WriteLine();        
         }
@@ -105,8 +110,7 @@ namespace chess
                 int z = c.figures.IndexOf(current);
                 c.figures[z] = new Queen(ref board, current.pos, c.color);
             }
-                
-
+            
             Player p = c;
             c = nc;
             nc = p;
@@ -154,14 +158,11 @@ namespace chess
                             }
                         }
                     }
-
                     if (nc.king.moves.Count == 0)
                         return true;
                 }
-
                 return false;
             }
-
             return false;
         }
     }

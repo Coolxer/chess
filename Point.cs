@@ -49,13 +49,5 @@ namespace chess
         {
             return x.ToString() + y.ToString();
         }
-
-        //public Point(int x, int y)
-        //{
-        //    Y = y;
-        //    X = this.x = Math.Abs(x - 8) ;
-
-        //    y = Convert.ToChar(Y + 97);
-        //}
     }
 }

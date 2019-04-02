@@ -107,8 +107,6 @@ namespace chess
                     }
                 }
             }
-
-            //show();
         }
     }
 }

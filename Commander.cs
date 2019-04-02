@@ -8,24 +8,14 @@ namespace chess
 {
     class Commander
     {
-        // reset
-        // exit // quit
-        // surrender
-        // a2a3 -> move
-        // a2 -> show available moves
-
-        //ai
-
-        public int process(String cmd) //returns 0 when there is exit request, 1 valid command, 2 invalid command
+        public int process(String cmd)
         {
-            if (cmd == "reset")
-                return 3;
-            else if (cmd == "exit" || cmd == "quit")
+            if (cmd == "exit" || cmd == "quit")
                 return 0;
+            if (cmd == "reset")
+                return 2;
             else if (cmd == "ai")
-                return 10;
-            else if (cmd == "next")
-                return 20;
+                return 3;
             else if (cmd.Length == 2)
             {
                 if ((cmd[0] >= 97 && cmd[0] <= 104) && (cmd[1] >= 49 && cmd[1] <= 56))
@@ -38,7 +28,7 @@ namespace chess
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("invalid command");
             Console.ResetColor();
-            return 2;
+            return -1;
         }
     }
 }

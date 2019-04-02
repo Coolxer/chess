@@ -9,57 +9,46 @@ namespace chess
     class Game
     {
         private Commander cmd;
-
         private Board board;
         private Player w;
         private Player b;
-
         private Judge judge;
-
-        private bool redraw = true;
 
         private int callback;
 
         public Game()
         {
             cmd = new Commander();
+            board = new Board();
 
             reset();
         }
 
         private void reset()
         {
-            board = new Board();
+            board.reset();
+            
             w = new Player('w', ref board);
             b = new Player('b', ref board);
 
-            for (int i = 0; i < 16; i++)
-            {
-                w.figures[i].init(ref board);
-                b.figures[i].init(ref board);
-            }
-
-            //Judge.Instance.init(ref board, ref w, ref b);
-
             judge = new Judge(ref board, ref w, ref b);
 
-            redraw = true;
+            draw();
+        }
+
+        private void draw()
+        {
+            Console.Clear();
+            Console.WriteLine();
+            Console.WriteLine("Current turn: " + judge.turn);
+
+            board.createGrid(w.figures, b.figures);
         }
 
         public void run()
         {
             while (true)
             {
-                if (redraw)
-                {
-                    Console.Clear();
-                    Console.WriteLine();
-                    Console.WriteLine("Current turn: " + judge.turn);
-
-                    board.createGrid(w.figures, b.figures);
-                    redraw = false;
-                }
-
                 if (judge.ai && judge.turn == 'b')
                 {
                     b.calcBestMoveOne();
@@ -73,19 +62,22 @@ namespace chess
 
                     if (code == 0)
                         break;
-                    else if (code == 3)
-                        reset();
-                    else if (code == 4)
-                        judge.helpMe(call);
-                    else if (code == 10)
-                        judge.ai = true;
                     else if (code == 1)
                         callback = judge.rating(call);
+                    else if (code == 2)
+                        reset();
+                    else if (code == 3)
+                        judge.ai = true;
+                    else if (code == 4)
+                    {
+                        draw();
+                        judge.showPossibleMoves(call);
+                    }
                 }
                 
                 if (callback == 1)
                 {
-                    redraw = true;
+                    draw();
                     callback = 0;
                 } 
                 else if (callback == 2)

@@ -8,42 +8,31 @@ namespace chess
 {
     public class Player
     {
-
         private char[] letters;
         private Board board;
-
-        private bool changed = false;
-
-        public char color { get; set; }
-
-        public Figure king { get; set; }
-
-        public  List <Figure> figures { get; set; }
-
-        public int movements { get; set; }
-
-        /* ----------------------------------------- */
-
+        
         private List<String> availablesMoves;
-
-        private Point lastPos;
-        private Figure lastFigure;
-
+        private Random random;
+        private Point lastPickedFigurePosition;
+        private Figure lastPickedFigure;
+        private bool changed = false;
         private int value = 0;
         private bool own = true;
 
+        public List<Figure> figures { get; set; }
+        public Figure king { get; set; }
+        public char color { get; set; }
+        public int movements { get; set; }
         public String bestMove { get; set; }
-
-        private Random random;
-
+        
         public Player(char c, ref Board board)
         {
             color = c;
-            letters = new char[8] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h' };
-            figures = new List<Figure>();
-
             this.board = board;
 
+            letters = new char[8] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h' };
+            figures = new List<Figure>();
+           
             movements = 0;
 
             if (c == 'w')
@@ -82,7 +71,7 @@ namespace chess
             king = figures[4];
         }
 
-        /**********************************************************************/
+        /******************************AI SECTION****************************************/
 
         private void generate()
         {
@@ -118,6 +107,7 @@ namespace chess
             }
         }
 
+        //first level of ai
         public String randomize()
         {
             generate();
@@ -145,6 +135,7 @@ namespace chess
             return var;
         }
 
+        //second level of ai
         public String calcBestMoveOne()
         {
             generate();
@@ -153,18 +144,18 @@ namespace chess
 
             foreach (String s in availablesMoves)
             {
-                lastPos = new Point(s[0], s[1]);
+                lastPickedFigurePosition = new Point(s[0], s[1]);
 
-                Figure f = board.fields[lastPos.X, lastPos.Y];
+                Figure f = board.fields[lastPickedFigurePosition.X, lastPickedFigurePosition.Y];
 
                 Point p = new Point(s[2], s[3]);
 
                 if(board.fields[p.X, p.Y] != null && board.fields[p.X, p.Y].color != color)
                 {
-                    lastFigure = board.fields[p.X, p.Y];
+                    lastPickedFigure = board.fields[p.X, p.Y];
                     board.fields[p.X, p.Y] = f;
 
-                    board.fields[lastPos.X, lastPos.Y] = null;
+                    board.fields[lastPickedFigurePosition.X, lastPickedFigurePosition.Y] = null;
 
                     changed = true;
                 }
@@ -179,8 +170,8 @@ namespace chess
 
                 if(changed)
                 {
-                    board.fields[p.X, p.Y] = lastFigure;
-                    board.fields[lastPos.X, lastPos.Y] = f;
+                    board.fields[p.X, p.Y] = lastPickedFigure;
+                    board.fields[lastPickedFigurePosition.X, lastPickedFigurePosition.Y] = f;
 
                     changed = false;
                 }
@@ -189,6 +180,7 @@ namespace chess
             return bestMove;
         }
 
+        //third level of ai
         public int calcAB(int depth)
         {
             if (depth == 0)
@@ -200,18 +192,18 @@ namespace chess
 
             foreach (String s in availablesMoves)
             {
-                lastPos = new Point(s[0], s[1]);
+                lastPickedFigurePosition = new Point(s[0], s[1]);
 
-                Figure f = board.fields[lastPos.X, lastPos.Y];
+                Figure f = board.fields[lastPickedFigurePosition.X, lastPickedFigurePosition.Y];
 
                 Point p = new Point(s[2], s[3]);
 
                 if (board.fields[p.X, p.Y] != null && board.fields[p.X, p.Y].color != color)
                 {
-                    lastFigure = board.fields[p.X, p.Y];
+                    lastPickedFigure = board.fields[p.X, p.Y];
                     board.fields[p.X, p.Y] = f;
 
-                    board.fields[lastPos.X, lastPos.Y] = null;
+                    board.fields[lastPickedFigurePosition.X, lastPickedFigurePosition.Y] = null;
 
                     changed = true;
                 }
@@ -242,6 +234,7 @@ namespace chess
             return value;
         }
 
+        //fourth level of ai
         public int calcBestMove(int depth, int alpha, int beta, bool own)
         {
             if (depth == 0)
@@ -258,18 +251,18 @@ namespace chess
 
             foreach (String s in availablesMoves)
             {
-                lastPos = new Point(s[0], s[1]);
+                lastPickedFigurePosition = new Point(s[0], s[1]);
 
-                Figure f = board.fields[lastPos.X, lastPos.Y];
+                Figure f = board.fields[lastPickedFigurePosition.X, lastPickedFigurePosition.Y];
 
                 Point p = new Point(s[2], s[3]);
 
                 if (board.fields[p.X, p.Y] != null && board.fields[p.X, p.Y].color != color)
                 {
-                    lastFigure = board.fields[p.X, p.Y];
+                    lastPickedFigure = board.fields[p.X, p.Y];
                     board.fields[p.X, p.Y] = f;
 
-                    board.fields[lastPos.X, lastPos.Y] = null;
+                    board.fields[lastPickedFigurePosition.X, lastPickedFigurePosition.Y] = null;
 
                     changed = true;
                 }
